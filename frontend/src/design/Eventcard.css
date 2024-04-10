@@ -8,6 +8,8 @@ img {
       gap:1rem;
       box-shadow: 0 0 10px #BEBDC4;
       padding: 2rem;
+      margin-bottom: 5px;
+      margin-top: 10px;
     }
     
     @media only screen and (max-width: 600px) {
@@ -20,4 +22,7 @@ img {
       img {
     width: 100%}
       
+    }
+    .card__btn{
+        margin: 3px;
     }

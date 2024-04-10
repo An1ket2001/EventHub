@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/api/emp",empRoutes)
 app.use("/api/events",eventRoutes);
-app.use("/api/loaction",locationRoutes)
+app.use("/api/location",locationRoutes)
 
 
 

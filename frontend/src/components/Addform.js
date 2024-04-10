@@ -1,8 +1,8 @@
-import React, { useState } from 'react';  
+import React, { useState,useEffect } from 'react';  
 import '../design/Addform.css';  
   
 const Addform = () => {  
-    const venueOptions = ['Bagmane tech park', 'Embassy golf link', 'Virtual Programme'];
+  const [venueList,setVenueList]=useState([]);
   const [eventData, setEventData] = useState({  
     eventName: '',  
     description: '',  
@@ -14,19 +14,37 @@ const Addform = () => {
     setEventData({ ...eventData, [e.target.name]: e.target.value });  
   };  
   
-  const handleSubmit = (e) => {  
+  const handleSubmit = async(e) => {  
     e.preventDefault();  
-    // Do something with the form data, like sending it to a server  
+    // Do something with the form data, like sending it to a server 
+    await fetch("http://localhost:5000/api/events/createEvent",{
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(eventData),
+    })
     console.log(eventData);  
   };  
   
+  useEffect(()=>{
+    const fetchVenue=async()=>{
+      const res= await fetch("http://localhost:5000/api/location/getlocation");
+      const data = await res.json();
+      console.log(data);
+      setEventData(data);
+    }
+    fetchVenue();
+  },[])
+
+
   return (  
     <form className="form" onSubmit={handleSubmit}>  
       <label htmlFor="eventName">Name of Event:</label>  
       <input  
         type="text"  
         id="eventName"  
-        name="eventName"  
+        name="eventTitle"  
         value={eventData.eventName}  
         onChange={handleChange}  
         required  
@@ -35,7 +53,7 @@ const Addform = () => {
       <label htmlFor="description">Description:</label>  
       <textarea  
         id="description"  
-        name="description"  
+        name="eventDescription"  
         value={eventData.description}  
         onChange={handleChange}  
         required  
@@ -45,7 +63,7 @@ const Addform = () => {
       <input  
         type="datetime-local"  
         id="dateTime"  
-        name="dateTime"  
+        name="eventdateTime"  
         value={eventData.dateTime}  
         onChange={handleChange}  
         required  
@@ -54,13 +72,13 @@ const Addform = () => {
       <label htmlFor="venue">Venue:</label>  
       <select  
         id="venue"  
-        name="venue"  
+        name="eventVenue"  
         value={eventData.venue}  
         onChange={handleChange}  
         required  
       >  
         <option value="">Select Venue</option>  
-        {venueOptions.map((option) => (  
+        {venueList.map((option) => (  
           <option key={option} value={option}>  
             {option}  
           </option>  

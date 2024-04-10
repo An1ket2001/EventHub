@@ -12,11 +12,11 @@ const eventSchema = new Schema({
     titleImage:{type:String},
     author: {
         type: Schema.Types.ObjectId,
-        ref: "Emp",
+        ref: "User",
       },
     subscribers:[{
         type: Schema.Types.ObjectId,
-        ref: "Emp",
+        ref: "User",
       }]
 });
 

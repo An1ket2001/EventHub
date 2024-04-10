@@ -1,5 +1,5 @@
 const Event = require("../models/Event");
-const Employee = require("../models/Employee");
+const Employee = require("../models/User");
 const { BlockBlobClient } = require('@azure/storage-blob');
 const { uuid } = require("uuidv4");
 

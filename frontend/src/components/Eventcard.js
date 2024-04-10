@@ -2,8 +2,15 @@ import React from "react";
 import "../design/Eventcard.css";
 
 const Eventcard = (props) => {
-    const handlefunction=(e)=>{
-        console.log(e.target.value);
+    const handlefunction=async(e)=>{
+        await fetch("http://localhost:5000/api/events/subscribeEvent",{
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify()
+        }
+        );
     }
     return (
 

@@ -1,31 +1,24 @@
-import React from "react";  
+import React,{useState,useEffect} from "react";  
 import "../design/Events.css";  
 import Eventcard from "./Eventcard"
   
 const Events = () => {  
-  const cards = [  
-    {  
-      id: 1,  
-      image: "https://images.unsplash.com/photo-1619490742661-8949b7d3a612?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",  
-      title:"Holi Celebration",
-      description: "Card 1 description",  
-      dateTime: "Date/Time 1",  
-      location: "Location 1",  
-    },  
-    {  
-      id: 2,  
-      image: "https://images.unsplash.com/photo-1619490742661-8949b7d3a612?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",  
-      title:"Diwali celebration",
-      description: "Card 2 description",  
-      dateTime: "Date/Time 2",  
-      location: "Location 2",  
-    },  
-    // Add more card objects as needed  
-  ];  
+   
+  const [eventData,setEventData]=useState([]);
   
+  useEffect(()=>{
+    const fetchEventData=async()=>{
+      const res = await fetch("http://localhost:5000/api/events/getEvents");
+      const data = await res.json();
+      setEventData(data);
+    }
+    fetchEventData();
+  },[])
+
+
   return (  
     <div className="container">  
-      {cards.map((card) => (  
+      {eventData.map((card) => (  
         <Eventcard  
           key={card.id}  
           title={card.title}

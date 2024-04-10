@@ -10,6 +10,7 @@ router.get("/getEvent/:imagename",EventController.getEventImage);
 router.get("/getEvents",EventController.getEvent);
 router.patch("/updateEvents",upload.single('imageDetails'),EventController.updateEvent);
 router.delete("/deleteEvents",EventController.deleteEvent);
+router.post("/subscribeEvent",EventController.subscribeEvent);
 
 
 

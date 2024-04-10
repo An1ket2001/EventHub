@@ -1,13 +1,13 @@
-const Employee = require("../models/Employee");
+const User = require("../models/User");
 
-const getEmployee = async (req, res) => {
+const getUser = async (req, res) => {
     try {
-        const Employees = await Employee.find({});
-        if (!Employees) {
-            return res.status(201).send("no Employees");
+        const Users = await User.find({});
+        if (!Users) {
+            return res.status(201).send("no Users");
         }
         else {
-            res.status(200).json(Employees);
+            res.status(200).json(Users);
         }
     } catch (err) {
         console.log(err);
@@ -16,10 +16,10 @@ const getEmployee = async (req, res) => {
 }
 
 
-const addEmployee = async (req, res) => {
+const addUser = async (req, res) => {
     try {
         const{name,desg} =  req.body;
-        const emp =await Employee.create({
+        const emp =await User.create({
             name:name,
             designation:desg
         })
@@ -31,10 +31,10 @@ const addEmployee = async (req, res) => {
     }
 }
 
-const deleteEmployee = async (req, res) => {
+const deleteUser = async (req, res) => {
     try {
         const {id}=req.body;
-        const emp =await Employee.findByIdAndDelete(id);
+        const emp =await User.findByIdAndDelete(id);
         return res.status(200).send("Successfully deleted");
     } catch (err) {
         console.log(err);
@@ -42,10 +42,10 @@ const deleteEmployee = async (req, res) => {
     }
 }
 
-const updateEmployee=async(req,res)=>{
+const updateUser=async(req,res)=>{
     try {
         const {id,name,desg}=req.body;
-        const emp =await Employee.findById(id);
+        const emp =await User.findById(id);
         emp.name=name;
         emp.designation=desg;
         await emp.save();
@@ -57,8 +57,8 @@ const updateEmployee=async(req,res)=>{
 }
 
 module.exports = {
-    getEmployee,
-    addEmployee,
-    deleteEmployee,
-    updateEmployee
+    getUser,
+    addUser,
+    deleteUser,
+    updateUser
 }

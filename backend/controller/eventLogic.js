@@ -9,7 +9,7 @@ const createEvent = async (req, res) => {
     try {
         const { title, description, authorId, locationId, date } = req.body;
         const filename = req.file.originalname + uuid();
-        const blobService = new BlockBlobClient("DefaultEndpointsProtocol=https;AccountName=eventhubstoragegenv2;AccountKey=HBsFVcADxL11O8rdvk9QoTI03K8A1s0XipnHtG/56cUkXvRhrpU7JeU3s6pVDaGf3xxI2jRyLI7e+AStigauJA==;EndpointSuffix=core.windows.net", "eventhubcontainer", filename);
+        const blobService = new BlockBlobClient(process.env.BLOB_URL, "eventhubcontainer", filename);
         blobService.uploadData(req.file.buffer)
             .then(
                 () => {
@@ -41,7 +41,7 @@ const createEvent = async (req, res) => {
 
 const getEventImage = async (req, res) => {
     const filename = req.params['imagename']
-    const blobService = new BlockBlobClient("DefaultEndpointsProtocol=https;AccountName=eventhubstoragegenv2;AccountKey=HBsFVcADxL11O8rdvk9QoTI03K8A1s0XipnHtG/56cUkXvRhrpU7JeU3s6pVDaGf3xxI2jRyLI7e+AStigauJA==;EndpointSuffix=core.windows.net", "eventhubcontainer", filename);
+    const blobService = new BlockBlobClient(process.env.BLOB_URL, "eventhubcontainer", filename);
     try {
         const downloadResponse = await blobService.download();
         const contentType = downloadResponse.contentType;
@@ -82,7 +82,7 @@ const updateEvent = async (req, res) => {
     try {
         const { title, description, authorId, locationId, date, eventId } = req.body;
         const filename = req.file.originalname + uuid();
-        const blobService = new BlockBlobClient("DefaultEndpointsProtocol=https;AccountName=eventhubstoragegenv2;AccountKey=HBsFVcADxL11O8rdvk9QoTI03K8A1s0XipnHtG/56cUkXvRhrpU7JeU3s6pVDaGf3xxI2jRyLI7e+AStigauJA==;EndpointSuffix=core.windows.net", "eventhubcontainer", filename);
+        const blobService = new BlockBlobClient(process.env.BLOB_URL, "eventhubcontainer", filename);
         blobService.uploadData(req.file.buffer)
             .then(
                 async () => {

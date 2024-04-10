@@ -7,14 +7,14 @@ const cors = require("cors");
 require("dotenv").config();
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({origin:'http://localhost:3000'}));
 app.use("/api/emp",empRoutes)
 app.use("/api/events",eventRoutes);
 app.use("/api/location",locationRoutes)
 
 
 
-mongoose.connect(process.env.MONGO_URI).then(() => {
+mongoose.connect(`${process.env.MONGO_URI}`).then(() => {
     app.listen(5000, (err) => {
         if (!err) {
             console.log("server running at port 5000");

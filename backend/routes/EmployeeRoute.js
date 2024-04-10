@@ -3,10 +3,10 @@ const EmpController = require("../controller/empLogic")
 const router = express.Router();
 
 
-router.get("/getemp", EmpController.getEmployee)
-router.post("/addemp", EmpController.addEmployee)
-router.delete("/deleteemp", EmpController.deleteEmployee)
-router.put("/updateemp",EmpController.updateEmployee)
+router.get("/getemp", EmpController.getUser)
+router.post("/addemp", EmpController.addUser)
+router.delete("/deleteemp", EmpController.deleteUser)
+router.put("/updateemp",EmpController.updateUser)
 
 
 module.exports=router;

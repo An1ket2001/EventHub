@@ -1,8 +1,9 @@
 const Location = require("../models/Location");
 
-const getLocation=async()=>{
+const getLocation=async(req,res)=>{
     try{
-        const location = Location.find({});
+        const location =await Location.find({});
+        console.log("hi")
         res.status(200).json(location);
     }catch(err)
     {

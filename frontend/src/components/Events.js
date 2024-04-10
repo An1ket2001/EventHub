@@ -22,9 +22,9 @@ const Events = () => {
         <Eventcard  
           key={card.id}  
           title={card.title}
-          image={card.image}  
+          titleImage={card.titleImage}  
           description={card.description}  
-          dateTime={card.dateTime}  
+          dateTime={card.date}  
           location={card.location}  
         />  
       ))}  

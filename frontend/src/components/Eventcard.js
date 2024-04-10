@@ -15,12 +15,12 @@ const Eventcard = (props) => {
     return (
 
         <div className="card">
-            <img src={props.image} className="card__img" />
-            <div class="card__body">
+            <img src={`http://localhost:5000/api/events/getEventImage/${props.titleImage}`} className="card__img" />
+            <div className="card__body">
                 <h2 className="card__title">{props.title}</h2>
                 <br />
                 <p className="card__description">{props.description}</p>
-                <h3 className="card__pricing">{props.dateTime}</h3>
+                <h3 className="card__pricing">{props.date}</h3>
                 <h3 className="card__pricing">{props.location}</h3>
 
                 <button className="card__btn">Read More</button>

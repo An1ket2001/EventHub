@@ -8,8 +8,9 @@ const { uuid } = require("uuidv4");
 const createEvent = async (req, res) => {
     try {
         const { title, description, authorId, locationId, date } = req.body;
+        console.log(req.file);
         const filename = req.file.originalname + uuid();
-        const blobService = new BlockBlobClient(process.env.BLOB_URL, "eventhubcontainer", filename);
+        const blobService = new BlockBlobClient(process.env.BLOB_URL, "images", filename);
         blobService.uploadData(req.file.buffer)
             .then(
                 () => {
@@ -41,7 +42,8 @@ const createEvent = async (req, res) => {
 
 const getEventImage = async (req, res) => {
     const filename = req.params['imagename']
-    const blobService = new BlockBlobClient(process.env.BLOB_URL, "eventhubcontainer", filename);
+    console.log(filename);
+    const blobService = new BlockBlobClient(process.env.BLOB_URL, "images", filename);
     try {
         const downloadResponse = await blobService.download();
         const contentType = downloadResponse.contentType;
@@ -55,7 +57,7 @@ const getEventImage = async (req, res) => {
 const getEvent = async (req, res) => {
     try {
         const { filters } = req.body;
-        if (filters.length == 0) {
+        if (filters==null || filters.length == 0) {
             const events = await Event.find({});
             res.status(200).json(events);
         } else {

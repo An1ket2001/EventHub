@@ -1,7 +1,9 @@
 import React, { useState, useEffect,useRef } from 'react';
 import '../design/Addform.css';
+import { useNavigate } from "react-router-dom";
 
 const Addform = () => {
+  const navigate = useNavigate(); 
   const [venueList, setVenueList] = useState([]);
   const [eventData, setEventData] = useState({
     title: '',
@@ -26,12 +28,18 @@ const Addform = () => {
     data.append("imageDetails",imageRef.current.files[0]);
     
     //const data={...eventData,imageDetails:imageRef.current.files[0],authorId:"6616cb4f2b543fd062acffab"}
-    // Do something with the form data, like sending it to a server 
-    await fetch("http://localhost:5000/api/events/createEvent", {
+    //Do something with the form data, like sending it to a server 
+    const res = await fetch("http://localhost:5000/api/events/createEvent", {
       method: "POST",
       
       body: data,
-    })
+    });
+    if(res)
+    {
+      navigate("/");
+    }
+    
+    
   };
 
   useEffect(() => {

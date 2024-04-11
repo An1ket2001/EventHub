@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Carousel from './components/Carousel';
 import Events from './components/Events';
 import Addform from './components/Addform';
+import LoginSignup from './components/LoginSignup';
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,6 +20,8 @@ return (
             <Route exact path="/" element={<Events />}>
             </Route>
             <Route exact path="/add" element={<Addform />}>
+            </Route>
+            <Route exact path="/login" element={<LoginSignup />}>
             </Route>
           </Routes>
         </div>

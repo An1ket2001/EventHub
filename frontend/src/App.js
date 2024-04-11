@@ -1,4 +1,3 @@
-import './App.css'
 import Navbar from './components/Navbar';
 import Carousel from './components/Carousel';
 import Events from './components/Events';
@@ -14,7 +13,6 @@ return (
   <>
       <Router>
         <Navbar />
-        {/* <Carousel /> */}
         <div className="container">
           <Routes>
             <Route exact path="/" element={<Events />}>

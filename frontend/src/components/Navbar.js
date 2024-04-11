@@ -2,6 +2,8 @@ import Helpline from "./Helpline";
 import "../design/Navbar.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { FaBars } from 'react-icons/fa'; 
+import { FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
     const [click, setClick] = useState(false);
@@ -64,7 +66,7 @@ const Navbar = () => {
                         </li>
                     </ul>
                     <div className="nav-icon" onClick={handleClick}>
-                        <i className={click ? "fa fa-times" : "fa fa-bars"}></i>
+                        {click?<FaTimes/>:<FaBars/>}
                     </div>
                 </div>
             </nav>

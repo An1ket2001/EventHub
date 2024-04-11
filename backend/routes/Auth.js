@@ -1,13 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const JWT_SECRET = "harsh@garwal";
 const auth = require("../middleware/auth")
-const { body, validationResult } = require('express-validator');
+const { body } = require('express-validator');
 const userController=require("../controller/empLogic");
+const desgController=require("../controller/desgnLogic");
 
+router.get("/getdesg",desgController.getdesgList)
 router.post("/createuser",userController.createuser);
 router.post("/login",userController.login);
 router.post("/nowgetuser",userController.nowgetuser);

@@ -1,6 +1,6 @@
 import './App.css'
 import Navbar from './components/Navbar';
-import Carousel from './components/Carousel';
+import CarouselComponent from './components/CarouselComponent';
 import Events from './components/Events';
 import Addform from './components/Addform';
 import {
@@ -13,9 +13,9 @@ return (
   <>
       <Router>
         <Navbar />
-        {/* <Carousel /> */}
         <div className="container">
           <Routes>
+            
             <Route exact path="/" element={<Events />}>
             </Route>
             <Route exact path="/add" element={<Addform />}>

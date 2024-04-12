@@ -1,5 +1,6 @@
 import React, { useState, useEffect,useRef } from 'react';
 import '../design/Addform.css';
+import Addevent from './Addevent';
 
 const Addform = () => {
   const [venueList, setVenueList] = useState([]);
@@ -46,6 +47,7 @@ const Addform = () => {
 
 
   return (
+    <>
     <form className="form" onSubmit={handleSubmit}>
       <label htmlFor="eventName">Name of Event:</label>
       <input
@@ -96,6 +98,8 @@ const Addform = () => {
 
       <button type="submit">Submit</button>
     </form>
+    <Addevent />
+    </>
   );
 };
 

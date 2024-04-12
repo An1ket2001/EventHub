@@ -2,6 +2,8 @@ import Helpline from "./Helpline";
 import "../design/Navbar.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { FaBars } from 'react-icons/fa'; 
+import { FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
     const [click, setClick] = useState(false);
@@ -22,7 +24,7 @@ const Navbar = () => {
                             <NavLink
                                 exact
                                 to="/"
-                                activeClassName="active"
+                                activeclassname="active"
                                 className="nav-links"
                                 onClick={click ? handleClick : null}
                             >
@@ -33,7 +35,7 @@ const Navbar = () => {
                             <NavLink
                                 exact
                                 to="/Add"
-                                activeClassName="active"
+                                activeclassname="active"
                                 className="nav-links"
                                 onClick={click ? handleClick : null}
                             >
@@ -43,8 +45,8 @@ const Navbar = () => {
                         <li className="nav-item">
                             <NavLink
                                 exact
-                                to="/blog"
-                                activeClassName="active"
+                                to="/login"
+                                activeclassname="active"
                                 className="nav-links"
                                 onClick={click ? handleClick : null}
                             >
@@ -55,7 +57,7 @@ const Navbar = () => {
                             <NavLink
                                 exact
                                 to="/contact"
-                                activeClassName="active"
+                                activeclassname="active"
                                 className="nav-links"
                                 onClick={click ? handleClick : null}
                             >
@@ -64,7 +66,7 @@ const Navbar = () => {
                         </li>
                     </ul>
                     <div className="nav-icon" onClick={handleClick}>
-                        <i className={click ? "fa fa-times" : "fa fa-bars"}></i>
+                        {click?<FaTimes/>:<FaBars/>}
                     </div>
                 </div>
             </nav>

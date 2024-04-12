@@ -1,0 +1,96 @@
+.container {  
+    max-width: 400px;  
+    margin: 0 auto;  
+    padding: 20px;  
+  }  
+    
+  .header {  
+    text-align: center;  
+    margin-bottom: 20px;  
+  }  
+    
+  .text {  
+    font-size: 24px;  
+    font-weight: bold;  
+  }  
+    
+  .underline {  
+    width: 50px;  
+    height: 3px;  
+    background-color: #000;  
+    margin: 10px auto;  
+  }  
+    
+  .inputs {  
+    margin-bottom: 20px;  
+  }  
+    
+  .input {  
+    margin-bottom: 10px;  
+  }  
+    
+  input[type="text"],  
+  input[type="email"],  
+  input[type="password"],  
+  select {  
+    width: 100%;  
+    padding: 10px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+  }  
+    
+  .forgot-password {  
+    text-align: center;  
+    margin-bottom: 20px;  
+  }  
+    
+  .forgot-password span {  
+    color: blue;  
+    cursor: pointer;  
+  }  
+    
+  .submit-container {  
+    display: flex;  
+    justify-content: space-between;  
+    margin-bottom: 20px;  
+  }  
+    
+  .submit {  
+    flex: 1;  
+    padding: 10px;  
+    text-align: center;  
+    background-color: #000;  
+    color: #fff;  
+    cursor: pointer;  
+  }  
+    
+  .gray {  
+    background-color: #ccc;  
+    cursor: not-allowed;  
+  }  
+    
+  .error {  
+    color: red;  
+    font-size: 12px;  
+    margin-top: 5px;  
+  }  
+    
+  @media (max-width: 600px) {  
+    .container {  
+      max-width: 100%;  
+      padding: 10px;  
+    }  
+    
+    .text {  
+      font-size: 20px;  
+    }  
+    
+    .submit-container {  
+      flex-direction: column;  
+    }  
+    
+    .submit {  
+      margin-bottom: 10px;  
+    }  
+  }  
+  

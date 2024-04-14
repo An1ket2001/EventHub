@@ -13,6 +13,7 @@ const Events = () => {
       setEventData(data);
     }
     fetchEventData();
+    
   },[])
 
 
@@ -20,12 +21,12 @@ const Events = () => {
     <div className="container">  
       {eventData.map((card) => (  
         <Eventcard  
-          key={card.id}  
+          key={card._id}  
           title={card.title}
           titleImage={card.titleImage}  
           description={card.description}  
           dateTime={card.date}  
-          location={card.location}  
+          location={card.locatio}  
         />  
       ))}  
     </div>  

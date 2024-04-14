@@ -21,7 +21,7 @@ const Eventcard = (props) => {
                 <br />
                 <p className="card__description">{props.description}</p>
                 <h3 className="card__pricing">{props.date}</h3>
-                <h3 className="card__pricing">{props.location}</h3>
+                <h3 className="card__pricing">{props.location[0].location}</h3>
 
                 <button className="card__btn">Read More</button>
                 <button className="card__btn" onClick={handlefunction}>Subscribe</button>

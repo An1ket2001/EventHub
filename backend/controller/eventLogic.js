@@ -1,5 +1,6 @@
 const Event = require("../models/Event");
 const Employee = require("../models/User");
+const Location = require("../models/Location");
 const { BlockBlobClient } = require('@azure/storage-blob');
 const { uuid } = require("uuidv4");
 
@@ -58,7 +59,14 @@ const getEvent = async (req, res) => {
     try {
         const { filters } = req.body;
         if (filters==null || filters.length == 0) {
-            const events = await Event.find({});
+            let events = await Event.aggregate([{
+                "$lookup": {
+                "from": "locations",
+                "localField": "location",
+                "foreignField": "_id",
+                "as": "locatio"
+              }}]);
+            
             res.status(200).json(events);
         } else {
             res.status(200).send("not implemented yet");

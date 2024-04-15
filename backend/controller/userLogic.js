@@ -6,20 +6,6 @@ const JWT_SECRET = "thisissecretdonotshare";
 const { body, validationResult } = require("express-validator");
 
 
-const getUser = async (req, res) => {
-  try {
-    const Users = await User.find({});
-    if (!Users) {
-      return res.status(201).send("no Users");
-    } else {
-      res.status(200).json(Users);
-    }
-  } catch (err) {
-    console.log(err);
-    return res.status(500).send("Something went wrong.Please try again.");
-  }
-};
-
 const addUser = async (req, res) => {
   try {
     const { name, desg } = req.body;
@@ -127,7 +113,7 @@ const login = async (req, res) => {
   }
 };
 
-const nowgetuser = async (req, res) => {
+const getUser = async (req, res) => {
   try {
     const userId = req.user.id;
     const user = await User.findById(userId).select("-password");
@@ -145,5 +131,4 @@ module.exports = {
   updateUser,
   createuser,
   login,
-  nowgetuser,
 };

@@ -42,7 +42,7 @@ const Navbar = () => {
                                 Add-Event
                             </NavLink>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <NavLink
                                 exact
                                 to="/login"
@@ -52,11 +52,11 @@ const Navbar = () => {
                             >
                                 Login
                             </NavLink>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             <NavLink
                                 exact
-                                to="/contact"
+                                to="/signup"
                                 activeclassname="active"
                                 className="nav-links"
                                 onClick={click ? handleClick : null}

@@ -19,7 +19,7 @@ return (
             </Route>
             <Route exact path="/add" element={<Addform />}>
             </Route>
-            <Route exact path="/login" element={<LoginSignup />}>
+            <Route exact path="/signup" element={<LoginSignup />}>
             </Route>
           </Routes>
         </div>

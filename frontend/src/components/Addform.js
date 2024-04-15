@@ -48,10 +48,15 @@ const Addform = () => {
   };
 
   useEffect(() => {
+    console.log(auth);
     const fetchVenue = async () => {
-      const res = await fetch("http://localhost:5000/api/location/getlocation");
+      const res = await fetch("http://localhost:5000/api/location/getlocation",{
+        method:"GET",
+        headers:{
+          "Authorization":`Bearer ${auth.token}`
+        }
+      });
       const data = await res.json();
-      console.log(data);
       setVenueList(data);
     }
     fetchVenue();

@@ -8,8 +8,9 @@ const { uuid } = require("uuidv4");
 
 const createEvent = async (req, res) => {
     try {
-        const { title, description, authorId, locationId, date } = req.body;
-        console.log(req.file);
+        const { title, description, locationId, date } = req.body;
+        authorId=req.user.id;
+        console.log(authorId);
         const filename = req.file.originalname + uuid();
         const blobService = new BlockBlobClient(process.env.BLOB_URL, "images", filename);
         blobService.uploadData(req.file.buffer)
@@ -43,7 +44,6 @@ const createEvent = async (req, res) => {
 
 const getEventImage = async (req, res) => {
     const filename = req.params['imagename']
-    console.log(filename);
     const blobService = new BlockBlobClient(process.env.BLOB_URL, "images", filename);
     try {
         const downloadResponse = await blobService.download();
@@ -57,20 +57,43 @@ const getEventImage = async (req, res) => {
 
 const getEvent = async (req, res) => {
     try {
+        console.log(req.body);
         const { filters } = req.body;
-        if (filters==null || filters.length == 0) {
-            let events = await Event.aggregate([{
+        let events = await Event.aggregate([{
                 "$lookup": {
                 "from": "locations",
                 "localField": "location",
                 "foreignField": "_id",
                 "as": "locatio"
               }}]);
+        events=events.filter((event)=>{
+            if(filters.location!=="")
+            {
+                return event.locatio[0].location===filters.location;
+            }else{
+                return event;
+            }
             
-            res.status(200).json(events);
-        } else {
-            res.status(200).send("not implemented yet");
-        }
+        })
+        events=events.filter((event)=>{
+            if(filters.IsEventOver==="upcoming")
+            {
+                return new Date(event.date)>=new Date();
+            }else{
+                return new Date(event.date)<new Date();
+            }
+            
+        })
+        events=events.filter((event)=>{
+            if(filters.date!=="")
+            {
+                return event.date.split("T")[0]===filters.date;
+            }else{
+                return event;
+            }
+            
+        })
+        return res.status(200).json(events);
     } catch (err) {
         console.log(err);
         res.status(500).send("Please try again.");

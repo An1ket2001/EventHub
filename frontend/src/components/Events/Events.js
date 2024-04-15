@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";  
-import "../design/Events.css";  
+import "../../design/Events.css";  
 import Eventcard from "./Eventcard"
 import EventBar from "./EventBar";
 import Filter from "./Filter";
@@ -29,7 +29,7 @@ const Events = () => {
     
     {/* <div className="container">   */}
     <EventBar filters={filters} setFilters={setFilters}/>
-    <Filter />
+    <Filter filters={filters} setFilters={setFilters}/>
 
       {eventData.map((card) => (  
         <Eventcard  

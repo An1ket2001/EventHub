@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import '../design/Login.css';
+import styles from '../../design/Login.module.css';
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../shared/AuthContext";
+import { AuthContext } from "../../shared/AuthContext";
 
 const LoginSignup = () => {
   const auth = useContext(AuthContext);
@@ -113,39 +113,39 @@ const LoginSignup = () => {
   }, [])
 
   return (
-    <div className='container'>
-      <div className="header">
-        <div className="text">{action}</div>
-        <div className="underline"></div>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <div className={styles.text}>{action}</div>
+        <div className={styles.underline}></div>
       </div>
-      <div className="inputs">
-        {action === "Sign Up" && (<div className="input">
-          <input type="text" placeholder='Username' value={username} onChange={handleUsernameChange} />
-          {errors.username && <span className="error">{errors.username}</span>}
+      <div className={styles.inputs}>
+        {action === "Sign Up" && (<div className={styles.input}>
+          <input className={styles.inputBx} type={styles.text} placeholder='Username' value={username} onChange={handleUsernameChange} />
+          {errors.username && <span className={styles.error}>{errors.username}</span>}
         </div>
         )}
 
-        <div className="input">
-          <input type="email" placeholder='Email' value={email} onChange={handleEmailChange} />
-          {errors.email && <span className="error">{errors.email}</span>}
+        <div className={styles.input}>
+          <input className={styles.inputBx} type="email" placeholder='Email' value={email} onChange={handleEmailChange} />
+          {errors.email && <span className={styles.error}>{errors.email}</span>}
         </div>
 
 
-        <div className="input">
-          <input type="password" placeholder='Password' value={password} onChange={handlePasswordChange} />
-          {errors.password && <span className="error">{errors.password}</span>}
+        <div className={styles.input}>
+          <input className={styles.inputBx} type="password" placeholder='Password' value={password} onChange={handlePasswordChange} />
+          {errors.password && <span className={styles.error}>{errors.password}</span>}
         </div>
 
         {action === "Sign Up" && (
-          <div className="input">
-            <input type="password" placeholder='Confirm Password' value={confirmPassword} onChange={handleConfirmPasswordChange} />
-            {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
+          <div className={styles.input}>
+            <input className={styles.inputBx} type="password" placeholder='Confirm Password' value={confirmPassword} onChange={handleConfirmPasswordChange} />
+            {errors.confirmPassword && <span className={styles.error}>{errors.confirmPassword}</span>}
           </div>
         )}
 
         {action === "Sign Up" && (
-          <div className="input">
-            <select value={designation} onChange={handleDesignationChange}>
+          <div className={styles.input}>
+            <select value={designation} onChange={handleDesignationChange} className={styles.selectBx}>
               <option>Select Designation</option>
               {
                 designationList.map((desg) => {
@@ -153,16 +153,16 @@ const LoginSignup = () => {
                 })
               }
             </select>
-            {errors.designation && <span className="error">{errors.designation}</span>}
+            {errors.designation && <span className={styles.error}>{errors.designation}</span>}
           </div>
         )}
       </div>
 
-      {action === "Sign Up" ? <div></div> : <div className="forgot-password">Forgot Password?<span>Click Here! </span></div>}
+      {action === "Sign Up" ? <div></div> : <div className={styles.forgotpassword}>Forgot Password?<span>Click Here! </span></div>}
 
-      <div className="submit-container">
-        <button className="submit" onClick={handleSubmit}>{action}</button>
-        <button className="submit gray" onClick={() => handleActionChange(action === "Login" ? "Sign Up" : "Login")}>
+      <div className={styles.submitContainer}>
+        <button className={styles.submit} onClick={handleSubmit}>{action}</button>
+        <button className={`${styles.submit} ${styles.gray}`} onClick={() => handleActionChange(action === "Login" ? "Sign Up" : "Login")}>
           {action === "Login" ? "Sign Up" : "Login"}
         </button>
       </div>

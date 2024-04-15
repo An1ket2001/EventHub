@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './components/Common/Navbar';
 //import CarouselComponent from './components/CarouselComponent';
-import Events from './components/Events';
-import Addform from './components/Addform';
-import LoginSignup from './components/LoginSignup';
-import {useAuth} from './components/AuthHook';
+import Events from './components/Events/Events';
+import Addform from './components/Events/Addform';
+import LoginSignup from './components/Auth/LoginSignup';
+import {useAuth} from './Hooks/AuthHook';
 import { AuthContext } from './shared/AuthContext';
-import Profile from "./components/Profile";
-import EventBar from './components/EventBar';
+import Profile from "./components/Auth/Profile";
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,6 +16,9 @@ import {
 function App() {
   
   const {token,isLoggedIn,isUserHr,loginfunc,logout} =useAuth();
+  useEffect(()=>{
+     loginfunc();
+  },[]);
 return (
   <>
   <AuthContext.Provider value={{token,isLoggedIn:isLoggedIn,isUserHr:isUserHr,login:loginfunc,logout:logout}}>

@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = "thisissecretdonotshare";
 const { body, validationResult } = require("express-validator");
+const mongoose=require("mongoose")
 
 
 const addUser = async (req, res) => {
@@ -116,8 +117,25 @@ const login = async (req, res) => {
 const getUser = async (req, res) => {
   try {
     const userId = req.user.id;
-    const user = await User.findById(userId).select("-password");
-    res.send(user);
+    // const user = await User.findById(userId).select("-password");
+    const user=await User.aggregate([
+      {
+      "$match":{"_id": new mongoose.Types.ObjectId(userId)}
+    },
+      {
+      "$lookup":{
+        "from":"designations",
+        "localField":"designation",
+        "foreignField":"_id",
+        "as":"desg"
+      }
+    },{
+        "$project":{
+          "password":0
+        }
+      }
+    ])
+    res.status(200).json(user);
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal server error");

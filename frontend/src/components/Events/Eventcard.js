@@ -1,5 +1,5 @@
 import React from "react";
-import "../design/Eventcard.css";
+import "../../design/Eventcard.css";
 
 const Eventcard = (props) => {
     const dateTimeInput=props.dateTime;
@@ -19,7 +19,7 @@ const Eventcard = (props) => {
     return (
 
         <div className="card">
-            <img src={`http://localhost:5000/api/events/getEventImage/${props.titleImage}`} className="card__img" />
+            <img src={`http://localhost:5000/api/events/getEventImage/${props.titleImage}`} alt="Img" className="card__img" />
             <div className="card__body">
                 <h2 className="card__title">{props.title}</h2>
                 <br />

@@ -1,5 +1,5 @@
 const express = require("express");
-const EmpController = require("../controller/empLogic")
+const EmpController = require("../controller/userLogic")
 const router = express.Router();
 
 

@@ -1,8 +1,11 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect,useRef, useContext } from 'react';
 import '../design/Addform.css';
 import { useNavigate } from "react-router-dom";
+import Addevent from './Addevent';
+import { AuthContext } from '../shared/AuthContext';
 
 const Addform = () => {
+  const auth=useContext(AuthContext);
   const navigate = useNavigate(); 
   const [venueList, setVenueList] = useState([]);
   const [eventData, setEventData] = useState({
@@ -31,7 +34,9 @@ const Addform = () => {
     //Do something with the form data, like sending it to a server 
     const res = await fetch("http://localhost:5000/api/events/createEvent", {
       method: "POST",
-      
+      headers:{
+        "Authorization":`Bearer ${auth.token}`
+      },
       body: data,
     });
     if(res)
@@ -54,6 +59,7 @@ const Addform = () => {
 
 
   return (
+    <>
     <form className="form" onSubmit={handleSubmit}>
       <label htmlFor="eventName">Name of Event:</label>
       <input
@@ -104,6 +110,8 @@ const Addform = () => {
 
       <button type="submit">Submit</button>
     </form>
+    <Addevent />
+    </>
   );
 };
 

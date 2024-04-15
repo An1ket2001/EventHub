@@ -1,8 +1,10 @@
 const User = require("../models/User");
+const Designation=require("../models/Designation")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = "harsh@garwal";
 const { body, validationResult } = require("express-validator");
+
 
 const getUser = async (req, res) => {
   try {
@@ -78,16 +80,19 @@ const createuser = async (req, res) => {
       password: secpass,
       designation:req.body.designationId
     });
+    const userDesignation=await Designation.findById(req.body.designationId);
     const data = {
       user: {
         id: real_user.id,
+        designation:userDesignation.designation
       },
     };
     //The Jsonweb token which we create has three part 1.algorithm 2.data 3.signature(JWT_SECRET)
     const authtoken = jwt.sign(data, JWT_SECRET);
-    res.json({ authtoken });
+    return res.status(200).json({ authtoken,"designation":userDesignation.designation });
   } catch (err) {
     console.error(err.message);
+    return res.status(500).send("Some Error Please Try Again!!");
   }
 };
 
@@ -99,7 +104,6 @@ const login = async (req, res) => {
   }
   try {
     const user = await User.findOne({ email });
-    console.log(user);
     if (!user) {
       return res.status(400).json({ error: "Invalid credentials" });
     }
@@ -108,16 +112,18 @@ const login = async (req, res) => {
       return res.status(400).json({ error: "Invalid credentials" });
     }
 
+    const userDesignation=await Designation.findById(user.designation);
     const data = {
       user: {
         id: user.id,
+        designation:userDesignation.designation
       },
     };
-
     const authtoken = jwt.sign(data, JWT_SECRET);
-    res.json({ authtoken });
+    res.status(200).json({ authtoken,"designation":userDesignation.designation });
   } catch (err) {
-    res.json({ error: "Something went wrong" });
+    console.log(err);
+    res.status(500).json({ error: "Something went wrong" });
   }
 };
 

@@ -1,16 +1,17 @@
 import Helpline from "./Helpline";
 import "../design/Navbar.css";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaBars } from 'react-icons/fa'; 
 import { FaTimes } from "react-icons/fa";
+import { AuthContext } from "../shared/AuthContext";
 
 const Navbar = () => {
+    const auth=useContext(AuthContext);
     const [click, setClick] = useState(false);
 
     const handleClick = () => setClick(!click);
     const Close = () => setClick(false);
-
     return (
         <div>
             <div className={click ? "main-container" : ""} onClick={() => Close()} />
@@ -31,7 +32,7 @@ const Navbar = () => {
                                 Home
                             </NavLink>
                         </li>
-                        <li className="nav-item">
+                        {auth.isLoggedIn && auth.isUserHr && <li className="nav-item">
                             <NavLink
                                 exact
                                 to="/Add"
@@ -41,8 +42,9 @@ const Navbar = () => {
                             >
                                 Add-Event
                             </NavLink>
-                        </li>
-                        <li className="nav-item">
+                        </li>}
+                        {auth.isLoggedIn===false?
+                        (<li className="nav-item">
                             <NavLink
                                 exact
                                 to="/login"
@@ -50,20 +52,21 @@ const Navbar = () => {
                                 className="nav-links"
                                 onClick={click ? handleClick : null}
                             >
-                                Login
+                                Login/SignUp
                             </NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink
-                                exact
-                                to="/contact"
-                                activeclassname="active"
-                                className="nav-links"
-                                onClick={click ? handleClick : null}
-                            >
-                                Sign-Up
-                            </NavLink>
-                        </li>
+                       
+                    ):(<li className="nav-item">
+                    <NavLink
+                        exact
+                        to="/login"
+                        activeclassname="active"
+                        className="nav-links"
+                        onClick={()=>{auth.logout()}}
+                    >
+                        Log Out
+                    </NavLink>
+                </li>)}
                     </ul>
                     <div className="nav-icon" onClick={handleClick}>
                         {click?<FaTimes/>:<FaBars/>}

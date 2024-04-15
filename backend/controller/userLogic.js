@@ -2,7 +2,7 @@ const User = require("../models/User");
 const Designation=require("../models/Designation")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "harsh@garwal";
+const JWT_SECRET = "thisissecretdonotshare";
 const { body, validationResult } = require("express-validator");
 
 

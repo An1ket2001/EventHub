@@ -1,7 +1,7 @@
 import Helpline from "./Helpline";
 import "../design/Navbar.css";
 import { NavLink } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useEffect,useContext, useState } from "react";
 import { FaBars } from 'react-icons/fa'; 
 import { FaTimes } from "react-icons/fa";
 import { AuthContext } from "../shared/AuthContext";

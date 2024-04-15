@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 //import CarouselComponent from './components/CarouselComponent';
 import Events from './components/Events';
@@ -13,6 +13,7 @@ import {
   Navigate
 } from "react-router-dom";
 function App() {
+  
   const {token,isLoggedIn,isUserHr,loginfunc,logout} =useAuth();
 return (
   <>

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "../../design/Profile.module.css";
 import { AuthContext } from "../../shared/AuthContext";
+import Subsevent from "../Events/Subsevent";
 
 const Profile = () => {
   const auth = useContext(AuthContext);
@@ -24,6 +25,7 @@ const Profile = () => {
   }, [auth.token]);
 
   return (
+    <>
     <div className={styles.profilepage}>
       <div className={styles.profileheader}>
         <img
@@ -39,6 +41,8 @@ const Profile = () => {
         <p>{userData.email}</p>
       </div>
     </div>
+    <Subsevent />
+    </>
   );
 };
 

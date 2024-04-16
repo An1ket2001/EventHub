@@ -41,6 +41,7 @@
     color: #fff;  
     border: none;  
     cursor: pointer;  
+    margin-bottom: 8px;
   }  
     
   .filterbutton:hover {  

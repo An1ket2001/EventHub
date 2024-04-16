@@ -14,6 +14,7 @@ router.delete("/deleteEvents",auth,EventController.deleteEvent);
 router.post("/subscribeEvent",auth,EventController.subscribeEvent);
 router.get("/getSubscribedEvents",auth,EventController.getSubscribedEvents);
 router.get("/myCreatedEvents",auth,EventController.getMyEvents);
+router.get("/getspecificevent/:id",auth,EventController.getSpecificEvents);
 
 
 

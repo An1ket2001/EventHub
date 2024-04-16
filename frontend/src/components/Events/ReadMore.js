@@ -1,20 +1,49 @@
-import React from 'react';  
-import styles from'../../design/ReadMore.module.css';  
- 
-const ReadMore = () => {  
-  return (  
-    <div className={styles.eventdescriptionpage}>  
-      <div className={styles.eventimage}>  
-        <img src="https://th.bing.com/th?id=OIP.HdETgqkYpSTZhRHQcDetIgHaFS&w=295&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2" alt="Event" />  
-      </div>  
-      <div className={styles.eventdetails}>  
-        <h1>Event Title</h1>  
-        <p>Date: January 1, 2022</p>  
-        <p>Location: Event Venue</p>  
-        <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl ac ultrices aliquet, nunc nunc tincidunt nunc, id lacinia nunc nisl id nunc. Sed euismod, nisl id aliquam tincidunt, nunc nunc tincidunt nunc, id lacinia nunc nisl id nunc.</p>  
-      </div>  
-    </div>  
-  );  
-};  
- 
-export default ReadMore;  
+import React, { useContext, useEffect, useState } from "react";
+import styles from "../../design/ReadMore.module.css";
+import { AuthContext } from "../../shared/AuthContext";
+const ReadMore = () => {
+  const auth = useContext(AuthContext);
+  const [eventData, setEventData] = useState({});
+
+  useEffect(() => {
+    if (auth.token !== "") {
+      const path = window.location;
+      const eventId = path.pathname.split("/")[2];
+      const getEventDetails = async () => {
+        const res = await fetch(
+          `http://localhost:5000/api/events/getspecificevent/${eventId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            },
+          }
+        );
+        const data = await res.json();
+        console.log(data);
+        setEventData(data[0]);
+      };
+      getEventDetails();
+    } else {
+      auth.login();
+    }
+  }, [auth.token]);
+
+  return (
+    <div className={styles.eventdescriptionpage}>
+      <div className={styles.eventimage}>
+        <img
+          src={`http://localhost:5000/api/events/getEventImage/${eventData.titleImage}`}
+          alt="Event"
+        />
+      </div>
+      <div className={styles.eventdetails}>
+        <h1>{eventData.title}</h1>
+        <p>Date: {eventData.date}</p>
+        <p>Location: {eventData.loactio && eventData.locatio[0].location}</p>
+        <p>Description: {eventData.description}</p>
+      </div>
+    </div>
+  );
+};
+
+export default ReadMore;

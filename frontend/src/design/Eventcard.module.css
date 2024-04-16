@@ -5,11 +5,18 @@ img {
     .card {
       display:flex;
       flex-direction:row;
-      gap:1rem;
-      box-shadow: 0 0 10px #BEBDC4;
+      gap:3rem;
+      box-shadow: 0 0 10px #958fb9;
       padding: 2rem;
-      margin-bottom: 5px;
+      /* margin-bottom: 5px;
       margin-top: 10px;
+      margin-left: auto; */
+      margin: auto;
+      margin-bottom: 2%;
+      max-width: 600px;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
       
     }
     
@@ -25,5 +32,11 @@ img {
       
     }
     .cardbtn{
-        margin: 3px;
+        margin: 4px;
+        padding: 5px 15px;
+        font-size: 14px;
+        background-color:rgb(197, 224, 226);
+        border-radius: 5px;
+        border: 1.5px solid grey;
+
     }

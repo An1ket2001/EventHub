@@ -34,6 +34,7 @@ const Events = () => {
       {eventData.map((card) => (  
         <Eventcard  
           key={card._id}  
+          id={card._id}
           title={card.title}
           titleImage={card.titleImage}  
           description={card.description}  

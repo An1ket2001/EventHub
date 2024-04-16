@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "../../design/Eventcard.module.css";
+import {useNavigate} from "react-router-dom";
 
 const Eventcard = (props) => {
+    const navigate=useNavigate();
     const dateTimeInput=props.dateTime;
     const new_datetime=new Date(dateTimeInput);
     const date=new_datetime.toLocaleDateString();
@@ -16,6 +18,9 @@ const Eventcard = (props) => {
         }
         );
     }
+    const handlereadmore=()=>{
+        navigate(`/event/${props.id}`);
+    }
     return (
 
         <div className={styles.card}>
@@ -28,7 +33,7 @@ const Eventcard = (props) => {
                 <h3 className={styles.cardpricing}>{time}</h3>
                 <h3 className={styles.cardpricing}>{props.location[0].location}</h3>
 
-                <button className={styles.cardbtn}>Read More</button>
+                <button className={styles.cardbtn} onClick={handlereadmore}>Read More</button>
                 <button className={styles.cardbtn} onClick={handlefunction}>Subscribe</button>
                 
             </div>

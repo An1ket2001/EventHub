@@ -4,13 +4,14 @@ const router = express.Router();
 const multer = require('multer');  
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }); 
+const auth =require("../middleware/auth");
 
-router.post("/createEvent",upload.single('imageDetails'),EventController.createEvent);
+router.post("/createEvent",auth,upload.single('imageDetails'),EventController.createEvent);
 router.get("/getEventImage/:imagename",EventController.getEventImage);
-router.get("/getEvents",EventController.getEvent);
-router.patch("/updateEvents",upload.single('imageDetails'),EventController.updateEvent);
-router.delete("/deleteEvents",EventController.deleteEvent);
-router.post("/subscribeEvent",EventController.subscribeEvent);
+router.post("/getEvents",EventController.getEvent);
+router.patch("/updateEvents",auth,upload.single('imageDetails'),EventController.updateEvent);
+router.delete("/deleteEvents",auth,EventController.deleteEvent);
+router.post("/subscribeEvent",auth,EventController.subscribeEvent);
 
 
 

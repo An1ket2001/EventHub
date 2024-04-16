@@ -1,10 +1,9 @@
-import Helpline from "./Helpline";
-import "../design/Navbar.css";
+import "../../design/Navbar.css";
 import { NavLink } from "react-router-dom";
-import { useContext, useState } from "react";
-import { FaBars } from 'react-icons/fa';
+import {useContext, useState } from "react";
+import { FaBars } from 'react-icons/fa'; 
 import { FaTimes } from "react-icons/fa";
-import { AuthContext } from "../shared/AuthContext";
+import { AuthContext } from "../../shared/AuthContext";
 
 const Navbar = () => {
     const auth = useContext(AuthContext);
@@ -66,20 +65,18 @@ const Navbar = () => {
                                 >
                                     Log Out
                                 </NavLink>
-                            </li>
-                            )}
-                        {auth.isLoggedIn &&
-                            <li className="nav-item">
-                                <NavLink
-                                    exact
-                                    to="/profile"
-                                    activeclassname="active"
-                                    className="nav-links"
-                                    onClick={click ? handleClick : null}
-                                >
-                                    Profile
-                                </NavLink>
-                            </li>
+                            </li>)}
+                        {
+                            auth.isLoggedIn &&
+                            <NavLink
+                                exact
+                                to="/profile"
+                                activeclassname="active"
+                                className="nav-links"
+                                onClick={click ? handleClick : null}
+                            >
+                                Profile
+                            </NavLink>
                         }
                     </ul>
                     <div className="nav-icon" onClick={handleClick}>

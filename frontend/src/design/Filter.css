@@ -1,0 +1,50 @@
+.filter-container {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    padding: 20px;  
+  }  
+    
+  .filter-box {  
+    border-radius: 10px;  
+    background-color: #f2f2f2;  
+    padding: 20px;  
+    width: 300px;  
+  }  
+    
+  .filter-fields {  
+    margin-bottom: 10px;  
+  }  
+    
+  .location-input,  
+  .date-input {  
+    margin-bottom: 10px;  
+  }  
+    
+  .location-input label,  
+  .date-input label {  
+    margin-right: 10px;  
+  }  
+    
+  .location-input select,  
+  .date-input input[type="date"] {  
+    padding: 5px;  
+    border-radius: 5px;  
+    border: 1px solid #ccc;  
+    width: 100%;  
+  }  
+    
+  .filter-button {  
+    padding: 10px 20px;  
+    border-radius: 5px;  
+    background-color: #4caf50;  
+    color: #fff;  
+    border: none;  
+    cursor: pointer;  
+    margin-bottom: 8px;
+  }  
+    
+  .filter-button:hover {  
+    background-color: #45a049;  
+  }  
+  

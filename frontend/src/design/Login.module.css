@@ -2,6 +2,7 @@
     max-width: 400px;  
     margin: 0 auto;  
     padding: 20px;  
+    
   }  
     
   .header {  
@@ -29,39 +30,42 @@
     margin-bottom: 10px;  
   }  
     
-  input[type="text"],  
-  input[type="email"],  
-  input[type="password"],  
-  select {  
-    width: 100%;  
+  .inputBx{  
+    width: 94%;  
     padding: 10px;  
     border: 1px solid #ccc;  
     border-radius: 5px;  
   }  
-    
-  .forgot-password {  
+  .selectBx {
+    width:99%;
+    padding: 10px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px; 
+  }
+  .forgotpassword {  
     text-align: center;  
     margin-bottom: 20px;  
   }  
     
-  .forgot-password span {  
+  .forgotpassword span {  
     color: blue;  
     cursor: pointer;  
   }  
     
-  .submit-container {  
+  .submitContainer {  
     display: flex;  
-    justify-content: space-between;  
+    justify-content: space-evenly;  
     margin-bottom: 20px;  
   }  
     
   .submit {  
-    flex: 1;  
+    /* flex: 1;   */
     padding: 10px;  
     text-align: center;  
     background-color: #000;  
     color: #fff;  
     cursor: pointer;  
+    width:36%;
   }  
     
   .gray {  
@@ -85,7 +89,7 @@
       font-size: 20px;  
     }  
     
-    .submit-container {  
+    .submitContainer {  
       flex-direction: column;  
     }  
     

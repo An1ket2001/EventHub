@@ -2,23 +2,10 @@ const User = require("../models/User");
 const Designation=require("../models/Designation")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "harsh@garwal";
+const JWT_SECRET = "thisissecretdonotshare";
 const { body, validationResult } = require("express-validator");
+const mongoose=require("mongoose")
 
-
-const getUser = async (req, res) => {
-  try {
-    const Users = await User.find({});
-    if (!Users) {
-      return res.status(201).send("no Users");
-    } else {
-      res.status(200).json(Users);
-    }
-  } catch (err) {
-    console.log(err);
-    return res.status(500).send("Something went wrong.Please try again.");
-  }
-};
 
 const addUser = async (req, res) => {
   try {
@@ -127,11 +114,28 @@ const login = async (req, res) => {
   }
 };
 
-const nowgetuser = async (req, res) => {
+const getUser = async (req, res) => {
   try {
     const userId = req.user.id;
-    const user = await User.findById(userId).select("-password");
-    res.send(user);
+    // const user = await User.findById(userId).select("-password");
+    const user=await User.aggregate([
+      {
+      "$match":{"_id": new mongoose.Types.ObjectId(userId)}
+    },
+      {
+      "$lookup":{
+        "from":"designations",
+        "localField":"designation",
+        "foreignField":"_id",
+        "as":"desg"
+      }
+    },{
+        "$project":{
+          "password":0
+        }
+      }
+    ])
+    res.status(200).json(user);
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal server error");
@@ -145,5 +149,4 @@ module.exports = {
   updateUser,
   createuser,
   login,
-  nowgetuser,
 };

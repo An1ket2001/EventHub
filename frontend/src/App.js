@@ -7,6 +7,7 @@ import LoginSignup from './components/Auth/LoginSignup';
 import {useAuth} from './Hooks/AuthHook';
 import { AuthContext } from './shared/AuthContext';
 import Profile from "./components/Auth/Profile";
+import ReadMore from './components/Events/ReadMore';
 import {
   BrowserRouter as Router,
   Routes,
@@ -37,6 +38,8 @@ return (
             <Route exact path="/login" element={<LoginSignup />}>
             </Route>
             <Route exact path="/profile" element={<Profile />}>
+            </Route>
+            <Route exact path="/event/:id" element={<ReadMore />}>
             </Route>
             <Route path='*' element={<Navigate to='/' />} />
           </Routes>

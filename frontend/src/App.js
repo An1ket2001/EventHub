@@ -12,6 +12,7 @@ import {
   Route,
   Navigate
 } from "react-router-dom";
+import Profile from './components/Profile';
 function App() {
   const {token,isLoggedIn,isUserHr,loginfunc,logout} =useAuth();
 return (
@@ -29,6 +30,8 @@ return (
             <Route exact path="/add" element={<Addform />}>
             </Route>
             <Route exact path="/login" element={<LoginSignup />}>
+            </Route>
+            <Route exact path="/profile" element={<Profile />}>
             </Route>
             <Route path='*' element={<Navigate to='/' />} />
           </Routes>

@@ -2,12 +2,12 @@ import Helpline from "./Helpline";
 import "../design/Navbar.css";
 import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
-import { FaBars } from 'react-icons/fa'; 
+import { FaBars } from 'react-icons/fa';
 import { FaTimes } from "react-icons/fa";
 import { AuthContext } from "../shared/AuthContext";
 
 const Navbar = () => {
-    const auth=useContext(AuthContext);
+    const auth = useContext(AuthContext);
     const [click, setClick] = useState(false);
 
     const handleClick = () => setClick(!click);
@@ -43,33 +43,47 @@ const Navbar = () => {
                                 Add-Event
                             </NavLink>
                         </li>}
-                        {auth.isLoggedIn===false?
-                        (<li className="nav-item">
-                            <NavLink
-                                exact
-                                to="/login"
-                                activeclassname="active"
-                                className="nav-links"
-                                onClick={click ? handleClick : null}
-                            >
-                                Login/SignUp
-                            </NavLink>
-                        </li>
-                       
-                    ):(<li className="nav-item">
-                    <NavLink
-                        exact
-                        to="/login"
-                        activeclassname="active"
-                        className="nav-links"
-                        onClick={()=>{auth.logout()}}
-                    >
-                        Log Out
-                    </NavLink>
-                </li>)}
+                        {auth.isLoggedIn === false ?
+                            (<li className="nav-item">
+                                <NavLink
+                                    exact
+                                    to="/login"
+                                    activeclassname="active"
+                                    className="nav-links"
+                                    onClick={click ? handleClick : null}
+                                >
+                                    Login/SignUp
+                                </NavLink>
+                            </li>
+
+                            ) : (<li className="nav-item">
+                                <NavLink
+                                    exact
+                                    to="/login"
+                                    activeclassname="active"
+                                    className="nav-links"
+                                    onClick={() => { auth.logout() }}
+                                >
+                                    Log Out
+                                </NavLink>
+                            </li>
+                            )}
+                        {auth.isLoggedIn &&
+                            <li className="nav-item">
+                                <NavLink
+                                    exact
+                                    to="/profile"
+                                    activeclassname="active"
+                                    className="nav-links"
+                                    onClick={click ? handleClick : null}
+                                >
+                                    Profile
+                                </NavLink>
+                            </li>
+                        }
                     </ul>
                     <div className="nav-icon" onClick={handleClick}>
-                        {click?<FaTimes/>:<FaBars/>}
+                        {click ? <FaTimes /> : <FaBars />}
                     </div>
                 </div>
             </nav>

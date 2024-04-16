@@ -1,5 +1,5 @@
 import React from "react";
-import "../../design/Eventcard.css";
+import styles from "../../design/Eventcard.module.css";
 
 const Eventcard = (props) => {
     const dateTimeInput=props.dateTime;
@@ -18,18 +18,18 @@ const Eventcard = (props) => {
     }
     return (
 
-        <div className="card">
-            <img src={`http://localhost:5000/api/events/getEventImage/${props.titleImage}`} alt="Img" className="card__img" />
-            <div className="card__body">
-                <h2 className="card__title">{props.title}</h2>
+        <div className={styles.card}>
+            <img src={`http://localhost:5000/api/events/getEventImage/${props.titleImage}`} alt="Img" className={styles.cardimg} />
+            <div className={styles.cardbody}>
+                <h2 className={styles.cardtitle}>{props.title}</h2>
                 <br />
-                <p className="card__description">{props.description}</p>
-                <h3 className="card__pricing">{date}</h3>
-                <h3 className="card__pricing">{time}</h3>
-                <h3 className="card__pricing">{props.location[0].location}</h3>
+                <p className={styles.carddescription}>{props.description}</p>
+                <h3 className={styles.cardpricing}>{date}</h3>
+                <h3 className={styles.cardpricing}>{time}</h3>
+                <h3 className={styles.cardpricing}>{props.location[0].location}</h3>
 
-                <button className="card__btn">Read More</button>
-                <button className="card__btn" onClick={handlefunction}>Subscribe</button>
+                <button className={styles.cardbtn}>Read More</button>
+                <button className={styles.cardbtn} onClick={handlefunction}>Subscribe</button>
                 
             </div>
         </div>

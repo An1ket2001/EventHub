@@ -1,8 +1,8 @@
 import React, { useState, useEffect,useRef, useContext } from 'react';
-import '../design/Addform.css';
+import styles from  '../../design/Addform.module.css';
 import { useNavigate } from "react-router-dom";
-import Addevent from './Addevent';
-import { AuthContext } from '../shared/AuthContext';
+import MyCreatedevent from './MyCreatedevent';
+import { AuthContext } from '../../shared/AuthContext';
 
 const Addform = () => {
   const auth=useContext(AuthContext);
@@ -48,26 +48,34 @@ const Addform = () => {
   };
 
   useEffect(() => {
-    console.log(auth);
-    const fetchVenue = async () => {
-      const res = await fetch("http://localhost:5000/api/location/getlocation",{
-        method:"GET",
-        headers:{
-          "Authorization":`Bearer ${auth.token}`
-        }
-      });
-      const data = await res.json();
-      setVenueList(data);
+    //console.log(auth);
+    if(auth.token!=="")
+    {
+      const fetchVenue = async () => {
+        const res = await fetch("http://localhost:5000/api/location/getlocation",{
+          method:"GET",
+          headers:{
+            "Authorization":`Bearer ${auth.token}`
+          }
+        });
+        const data = await res.json();
+        setVenueList(data);
+      }
+      fetchVenue();
     }
-    fetchVenue();
-  }, [])
+    else{
+      auth.login();
+    }
+    
+  }, [auth.token])
 
 
   return (
     <>
-    <form className="form" onSubmit={handleSubmit}>
-      <label htmlFor="eventName">Name of Event:</label>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <label className={styles.inpLabel} htmlFor="eventName">Name of Event:</label>
       <input
+      className={styles.formInput}
         type="text"
         id="eventName"
         name="title"
@@ -76,8 +84,9 @@ const Addform = () => {
         required
       />
 
-      <label htmlFor="description">Description:</label>
+      <label className={styles.inpLabel} htmlFor="description">Description:</label>
       <textarea
+      className={styles.formInput}
         id="description"
         name="description"
         value={eventData.description}
@@ -85,8 +94,9 @@ const Addform = () => {
         required
       ></textarea>
 
-      <label htmlFor="dateTime">Date/Time:</label>
+      <label className={styles.inpLabel} htmlFor="dateTime">Date/Time:</label>
       <input
+      className={styles.formInput}
         type="datetime-local"
         id="dateTime"
         name="date"
@@ -95,8 +105,9 @@ const Addform = () => {
         required
       />
 
-      <label htmlFor="venue">Venue:</label>
+      <label className={styles.inpLabel} htmlFor="venue">Venue:</label>
       <select
+      className={styles.formSelect}
         id="venue"
         name="locationId"
         value={eventData.locationId}
@@ -110,12 +121,12 @@ const Addform = () => {
           </option>
         ))}
       </select>
-      <label>Select Image:</label>
-      <input type="file" ref={imageRef}></input>
+      <label className={styles.inpLabel}>Select Image:</label>
+      <input className={styles.formInput} type="file" ref={imageRef}></input>
 
-      <button type="submit">Submit</button>
+      <button className={styles.submitBtn} type="submit">Submit</button>
     </form>
-    <Addevent />
+    <MyCreatedevent />
     </>
   );
 };

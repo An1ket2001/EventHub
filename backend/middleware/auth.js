@@ -3,7 +3,7 @@ const JWT_SECRET = "thisissecretdonotshare";
 const auth = (req, res, next) => {
     //get the user from the jwt token and add id to req object
     let token = req.header('Authorization');
-    console.log(token);
+    // console.log(token);
     if (!token) {
         res.status(401).send({ error: "please send valid auth-token" });
     }

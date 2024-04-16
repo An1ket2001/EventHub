@@ -15,5 +15,5 @@ router.post("/login", [
     body("email").isEmail(),
     body("password").exists()//This .exists indicates that the password block couldn't be empty
 ], userController.login)
-router.post("/getuser", auth, userController.getUser);
+router.get("/getuser", auth, userController.getUser);
 module.exports = router;

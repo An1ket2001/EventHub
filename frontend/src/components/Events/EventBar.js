@@ -1,5 +1,5 @@
 import React, { useState } from 'react';  
-import "../design/EventBar.css"
+import "../../design/EventBar.css"
   
 const EventBar = ({filters,setFilters}) => {  
   const [selectedButton, setSelectedButton] = useState('upcoming');  

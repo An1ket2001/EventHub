@@ -1,10 +1,9 @@
-import Helpline from "./Helpline";
-import "../design/Navbar.css";
+import "../../design/Navbar.css";
 import { NavLink } from "react-router-dom";
-import { useEffect,useContext, useState } from "react";
+import {useContext, useState } from "react";
 import { FaBars } from 'react-icons/fa'; 
 import { FaTimes } from "react-icons/fa";
-import { AuthContext } from "../shared/AuthContext";
+import { AuthContext } from "../../shared/AuthContext";
 
 const Navbar = () => {
     const auth = useContext(AuthContext);

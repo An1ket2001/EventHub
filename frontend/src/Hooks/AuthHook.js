@@ -15,7 +15,7 @@ export const useAuth = () => {
         setIsUserHr(true);
       }
     }
-  });
+  },[]);
 
   const logout = () => {
     setIsLoggedIn(false);

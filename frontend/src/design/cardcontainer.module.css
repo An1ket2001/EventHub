@@ -1,4 +1,4 @@
-.card-container {  
+.cardcontainer {  
     display: flex;
     overflow-x: scroll;
     padding: 20px;
@@ -21,7 +21,7 @@
     background-color: #e6e6e6;  
   }  
     
-  .card-image {  
+  .cardimage {  
     width: 100%;  
     height: 200px;  
     object-fit: cover;  
@@ -29,26 +29,26 @@
     border-top-right-radius: 5px;  
   }  
     
-  .card-content {  
+  .cardcontent {  
     padding: 20px;  
   }  
     
-  .card-title {  
+  .cardtitle {  
     font-size: 18px;  
     font-weight: bold;  
     margin-bottom: 10px;  
   }  
     
-  .card-description {  
+  .carddescription {  
     margin-bottom: 10px;  
   }  
     
-  .card-venue {  
+  .cardvenue {  
     font-style: italic;  
     margin-bottom: 10px;  
   }  
     
-  .card-buttons {  
+  .cardbuttons {  
     display: flex;  
     justify-content: space-between;  
     position: absolute;  
@@ -62,8 +62,8 @@
     opacity: 1;  
   }  
     
-  .edit-button,  
-  .delete-button {  
+  .editbutton,  
+  .deletebutton {  
     padding: 5px 10px;  
     border: none;  
     border-radius: 3px;  
@@ -72,11 +72,11 @@
     cursor: pointer;  
   }  
     
-  .edit-button {  
+  .editbutton {  
     margin-right: 5px;  
   }  
     
-  .delete-button {  
+  .deletebutton {  
     background-color: #dc3545;  
   }  
   

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';  
-import "../../design/Filter.css"
+import styles from "../../design/Filter.module.css"
 import { AuthContext } from '../../shared/AuthContext';
   
 const Filter = ({filters,setFilters}) => {  
@@ -43,10 +43,10 @@ const Filter = ({filters,setFilters}) => {
     }
   },[auth.login])
   return (  
-    <div className="filter-container">  
-      <div className="filter-box">  
-        <div className="filter-fields">  
-          <div className="location-input">  
+    <div className={styles.filtercontainer}>  
+      <div className={styles.filterbox}>  
+        <div className={styles.filterfields}>  
+          <div className={styles.locationinput}>  
             <label htmlFor="location">Location:</label>  
             <select id="location" value={location} onChange={handleLocationChange}>  
             <option value="">Select Location</option>  
@@ -58,7 +58,7 @@ const Filter = ({filters,setFilters}) => {
             }
             </select>  
           </div>  
-          <div className="date-input">  
+          <div className={styles.dateinput}>  
             <label htmlFor="date">Select Date:</label>  
             <input  
               type="date"  
@@ -68,8 +68,8 @@ const Filter = ({filters,setFilters}) => {
             />  
           </div>  
         </div>  
-        <button className="filter-button" onClick={handleFilter}>Apply Filter</button><br/>  
-        <button className="filter-button" onClick={handleRemoveFilter}>Remove Filter</button>  
+        <button className={styles.filterbutton} onClick={handleFilter}>Apply Filter</button><br/>  
+        <button className={styles.filterbutton} onClick={handleRemoveFilter}>Remove Filter</button>  
       </div>  
     </div>  
   );  

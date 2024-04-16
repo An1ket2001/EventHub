@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";  
-import "../../design/Events.css";  
+import "../../design/Events.module.css";  
 import Eventcard from "./Eventcard"
 import EventBar from "./EventBar";
 import Filter from "./Filter";

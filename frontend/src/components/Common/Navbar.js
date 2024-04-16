@@ -1,4 +1,4 @@
-import "../../design/Navbar.css";
+import styles from "../../design/navbar.module.css";
 import { NavLink } from "react-router-dom";
 import {useContext, useState } from "react";
 import { FaBars } from 'react-icons/fa'; 
@@ -13,54 +13,54 @@ const Navbar = () => {
     const Close = () => setClick(false);
     return (
         <div>
-            <div className={click ? "main-container" : ""} onClick={() => Close()} />
-            <nav className="navbar" onClick={e => e.stopPropagation()}>
-                <div className="nav-container">
-                    <NavLink exact to="/" className="nav-logo">
-                        <i className="fa fa-code">Event-Hub</i>
+            <div className={click ? `${styles.maincontainer}` : ""} onClick={() => Close()} />
+            <nav className={styles.navbar} onClick={e => e.stopPropagation()}>
+                <div className={styles.navcontainer}>
+                    <NavLink exact to="/" className={styles.navlogo}>
+                        <i className={`${styles.fa} ${styles.facode}`}>Event-Hub</i>
                     </NavLink>
-                    <ul className={click ? "nav-menu active" : "nav-menu"}>
-                        <li className="nav-item">
+                    <ul className={click ? `${styles.navmenu} ${styles.active}` :`${styles.navmenu}`}>
+                        <li className={styles.navitem}>
                             <NavLink
                                 exact
                                 to="/"
-                                activeclassname="active"
-                                className="nav-links"
+                                activeclassname={styles.active}
+                                className={styles.navlinks}
                                 onClick={click ? handleClick : null}
                             >
                                 Home
                             </NavLink>
                         </li>
-                        {auth.isLoggedIn && auth.isUserHr && <li className="nav-item">
+                        {auth.isLoggedIn && auth.isUserHr && <li className={styles.navitem}>
                             <NavLink
                                 exact
                                 to="/Add"
-                                activeclassname="active"
-                                className="nav-links"
+                                activeclassname={styles.active}
+                                className={styles.navlinks}
                                 onClick={click ? handleClick : null}
                             >
                                 Add-Event
                             </NavLink>
                         </li>}
                         {auth.isLoggedIn === false ?
-                            (<li className="nav-item">
+                            (<li className={styles.navitem}>
                                 <NavLink
                                     exact
                                     to="/login"
-                                    activeclassname="active"
-                                    className="nav-links"
+                                    activeclassname={styles.active}
+                                    className={styles.navlinks}
                                     onClick={click ? handleClick : null}
                                 >
                                     Login/SignUp
                                 </NavLink>
                             </li>
 
-                            ) : (<li className="nav-item">
+                            ) : (<li className={styles.navitem}>
                                 <NavLink
                                     exact
                                     to="/login"
-                                    activeclassname="active"
-                                    className="nav-links"
+                                    activeclassname={styles.active}
+                                    className={styles.navlinks}
                                     onClick={() => { auth.logout() }}
                                 >
                                     Log Out
@@ -71,15 +71,15 @@ const Navbar = () => {
                             <NavLink
                                 exact
                                 to="/profile"
-                                activeclassname="active"
-                                className="nav-links"
+                                activeclassname={styles.active}
+                                className={styles.navlinks}
                                 onClick={click ? handleClick : null}
                             >
                                 Profile
                             </NavLink>
                         }
                     </ul>
-                    <div className="nav-icon" onClick={handleClick}>
+                    <div className={styles.navicon} onClick={handleClick}>
                         {click ? <FaTimes /> : <FaBars />}
                     </div>
                 </div>

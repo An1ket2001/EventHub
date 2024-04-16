@@ -1,9 +1,9 @@
 const Event = require("../models/Event");
-const Employee = require("../models/User");
 const Location = require("../models/Location");
 const { BlockBlobClient } = require('@azure/storage-blob');
 const { uuid } = require("uuidv4");
-
+const User = require("../models/User");
+const mongoose = require("mongoose");
 
 
 const createEvent = async (req, res) => {
@@ -57,7 +57,7 @@ const getEventImage = async (req, res) => {
 
 const getEvent = async (req, res) => {
     try {
-        console.log(req.body);
+        // console.log(req.body);
         const { filters } = req.body;
         let events = await Event.aggregate([{
                 "$lookup": {
@@ -113,7 +113,8 @@ const deleteEvent = async (req, res) => {
 
 const updateEvent = async (req, res) => {
     try {
-        const { title, description, authorId, locationId, date, eventId } = req.body;
+        const { title, description, locationId, date, eventId } = req.body;
+        const authorId = req.user.id;
         const filename = req.file.originalname + uuid();
         const blobService = new BlockBlobClient(process.env.BLOB_URL, "eventhubcontainer", filename);
         blobService.uploadData(req.file.buffer)
@@ -136,7 +137,7 @@ const updateEvent = async (req, res) => {
                     (err) => {
                         if (err) {
                             console.log(err);
-                            res.status(500).send("Please try again later fromm blob.");
+                            res.status(500).send("Please try again later from blob.");
                             return;
                         }
                     })
@@ -146,27 +147,60 @@ const updateEvent = async (req, res) => {
     }
 }
 
-const subscribeEvent=()=>{
+const subscribeEvent=async(req,res)=>{
     try{
-        const {userId,eventId}=req.body;
-        const user = Employee.findById(userId);
+        const {eventId}=req.body;
+        const userId = req.user.id;
+        console.log(userId);
+        const user =await User.findById(userId);
         if(!user)
         {
-            res.send(400).send("Invalid User");
+            return res.status(400).send("Invalid User");
+
         }
-        const events = Event.findById(eventId);
+        let events =await Event.findById(eventId);
         events.subscribers.push(userId);
-        events.save();
-        res.status(200).send("Subscribed successfully");
+        await events.save();
+        return res.status(200).send("Subscribed successfully");
     }catch(err){
-        res.status(500).send("Internal server Error.Please try again later.");
+        console.log(err);
+        return res.status(500).send("Internal server Error.Please try again later.");
     }
 }
+
+const getSubscribedEvents=async(req,res)=>{
+    try{
+        const userId=req.user.id;
+        let events =await Event.find({});
+        events=events.filter((eve)=>{
+            return eve.subscribers.includes(userId);
+        })
+        return res.status(200).json(events);
+    }catch(err){
+        console.log(err);
+        return res.status(500).send("Please Try again.There was some error.")
+    }
+}
+
+const getMyEvents=async(req,res)=>{
+    try{
+        const authorId = req.user.id;
+        const events = await Event.find({"author":new mongoose.Types.ObjectId(authorId)});
+        return res.status(200).json(events);
+    }catch(err)
+    {
+        console.log(err);
+        return res.status(500).send("There is Some Error.Please Try Again.")
+    }
+}
+
 module.exports = {
     createEvent,
     getEventImage,
     getEvent,
     deleteEvent,
     updateEvent,
-    subscribeEvent
+    subscribeEvent,
+    getSubscribedEvents,
+    getMyEvents
 }

@@ -12,6 +12,8 @@ router.post("/getEvents",EventController.getEvent);
 router.patch("/updateEvents",auth,upload.single('imageDetails'),EventController.updateEvent);
 router.delete("/deleteEvents",auth,EventController.deleteEvent);
 router.post("/subscribeEvent",auth,EventController.subscribeEvent);
+router.get("/getSubscribedEvents",auth,EventController.getSubscribedEvents);
+router.get("/myCreatedEvents",auth,EventController.getMyEvents);
 
 
 

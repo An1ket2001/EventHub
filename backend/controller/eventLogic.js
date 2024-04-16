@@ -11,7 +11,7 @@ const createEvent = async (req, res) => {
         const { title, description, locationId, date } = req.body;
         authorId=req.user.id;
         console.log(authorId);
-        const filename = req.file.originalname + uuid();
+        const filename = req.file.originalname + uuid();//This things to ask for
         const blobService = new BlockBlobClient(process.env.BLOB_URL, "images", filename);
         blobService.uploadData(req.file.buffer)
             .then(

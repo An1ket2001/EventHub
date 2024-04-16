@@ -18,7 +18,7 @@ const EventBar = ({filters,setFilters}) => {
         Past Events  
       </button>  
       <button  
-        className={`event-button ${selectedButton === 'upcoming' ? 'selected' : ''}`}  
+        className={`event-button ${selectedButton === 'upcoming' ? 'selected' : ''}`}
         onClick={() => handleButtonClick('upcoming')}  
       >  
         Upcoming Events  
@@ -28,3 +28,6 @@ const EventBar = ({filters,setFilters}) => {
 };  
   
 export default EventBar;  
+
+
+

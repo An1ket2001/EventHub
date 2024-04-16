@@ -1,4 +1,4 @@
-.profile-page {
+.profilepage {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,18 +10,18 @@
     background-color: #f0f0f0;
   }
  
-  .profile-header {
+  .profileheader {
     text-align: center;
     margin-bottom: 20px;
   }
  
-  .profile-picture {
+  .profilepicture {
     width: 150px;
     height: 150px;
     border-radius: 50%;
   }
  
-  .profile-content {
+  .profilecontent {
     background-color: rgb(204, 228, 230);
     height: 40%;
     width: 70%;
@@ -30,28 +30,28 @@
     border-radius: 30px;
   }
  
-  .profile-name {
+  .profilename {
     margin-top: 10px;
   }
  
-  .profile-bio {
+  .profilebio {
     margin-top: 10px;
     color: #555;
   }
  
-  .profile-content h2 {
+  .profilecontent h2 {
     margin-top: 20px;
   }
  
-  .profile-content ul {
+  .profilecontent ul {
     list-style-type: none;
     padding: 0;
   }
  
-  .profile-content li {
+  .profilecontent li {
     margin-bottom: 5px;
   }
  
-  .profile-content p {
+  .profilecontent p {
     margin-bottom: 10px;
   }

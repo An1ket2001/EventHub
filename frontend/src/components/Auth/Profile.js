@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import "../../design/Profile.css";
+import styles from "../../design/Profile.module.css";
 import { AuthContext } from "../../shared/AuthContext";
+import Subsevent from "../Events/Subsevent";
 
 const Profile = () => {
   const auth = useContext(AuthContext);
@@ -24,21 +25,24 @@ const Profile = () => {
   }, [auth.token]);
 
   return (
-    <div className="profile-page">
-      <div className="profile-header">
+    <>
+    <div className={styles.profilepage}>
+      <div className={styles.profileheader}>
         <img
           src="https://th.bing.com/th?id=OIP.Wytlw5AmN2HoCJ_kLGF1EgHaF7&w=279&h=223&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2"
           alt="Profile"
-          className="profile-picture"
+          className={styles.profilepicture}
         />
-        <h1 className="profile-name">{userData.name}</h1>
-        <p className="profile-bio">{userData.desg&&userData.desg[0].designation}</p>
+        <h1 className={styles.profilename}>{userData.name}</h1>
+        <p className={styles.profilebio}>{userData.desg&&userData.desg[0].designation}</p>
       </div>
-      <div className="profile-content">
+      <div className={styles.profilecontent}>
         <h2>Email-Id</h2>
         <p>{userData.email}</p>
       </div>
     </div>
+    <Subsevent />
+    </>
   );
 };
 

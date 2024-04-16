@@ -1,5 +1,5 @@
 import React, { useState } from 'react';  
-import "../../design/EventBar.css"
+import styles from "../../design/EventBar.module.css"
   
 const EventBar = ({filters,setFilters}) => {  
   const [selectedButton, setSelectedButton] = useState('upcoming');  
@@ -10,15 +10,15 @@ const EventBar = ({filters,setFilters}) => {
   };  
   
   return (  
-    <div className="event-bar">  
+    <div className={styles.eventbar}>  
       <button  
-        className={`event-button ${selectedButton === 'past' ? 'selected' : ''}`}  
+        className={`${styles.eventbutton} ${selectedButton === `${styles.past} ? ${styles.selected} : ''`}`}  
         onClick={() => handleButtonClick('past')}  
       >  
         Past Events  
       </button>  
       <button  
-        className={`event-button ${selectedButton === 'upcoming' ? 'selected' : ''}`}
+        className={`${styles.eventbutton} ${selectedButton === `${styles.upcoming} ? ${styles.selected} : ''`}`} 
         onClick={() => handleButtonClick('upcoming')}  
       >  
         Upcoming Events  

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';  
-import '../../design/cardcontainer.css';  
+import styles from '../../design/cardcontainer.module.css';  
   
 const Addevent = () => {  
   const data = [  
@@ -35,23 +35,23 @@ const Addevent = () => {
   };  
   
   return (  
-    <div className="card-container">  
+    <div className={styles.cardcontainer}>  
       {data.map((item) => (  
         <div  
-          className={`card ${hoveredCard === item.id ? 'hovered' : ''}`}  
+          className={`${styles.card} ${hoveredCard ===` ${styles.item} ? ${styles.hovered} : ''`}`}  
           key={item.id}  
           onMouseEnter={() => handleCardHover(item.id)}  
           onMouseLeave={handleCardLeave}  
         >  
-          <img src="image.jpg" alt="Event" className="card-image" />  
-          <div className="card-content">  
-            <h3 className="card-title">{item.name}</h3>  
-            <p className="card-description">{item.description}</p>  
-            <p className="card-venue">Venue: {item.venue}</p>  
+          <img src="image.jpg" alt="Event" className={styles.cardimage} />  
+          <div className={styles.cardcontent}>  
+            <h3 className={styles.cardtitle}>{item.name}</h3>  
+            <p className={styles.carddescription}>{item.description}</p>  
+            <p className={styles.cardvenue}>Venue: {item.venue}</p>  
             {hoveredCard === item.id && (  
-              <div className="card-buttons">  
-                <button className="edit-button">Edit</button>  
-                <button className="delete-button">Delete</button>  
+              <div className={styles.cardbuttons}>  
+                <button className={styles.editbutton}>Edit</button>  
+                <button className={styles.deletebutton}>Delete</button>  
               </div>  
             )}  
           </div>  

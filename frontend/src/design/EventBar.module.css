@@ -1,4 +1,4 @@
-.event-bar {  
+.eventbar {  
     display: flex;  
     justify-content: center;  
     align-items: center;  
@@ -7,7 +7,7 @@
     margin-bottom: 30px; 
   }  
     
-  .event-button {  
+  .eventbutton {  
     display: flex;  
     justify-content: center;  
     align-items: center;  
@@ -20,11 +20,11 @@
     color: blue;
   }  
     
-  .event-button:hover {  
+  .eventbutton:hover {  
     background-color: #ddd;  
   }  
     
-  .event-button.selected {  
+  .eventbutton.selected {  
     background-color: #333;  
     color: #ff0b1b;  
   }  

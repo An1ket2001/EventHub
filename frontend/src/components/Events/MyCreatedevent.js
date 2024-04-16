@@ -38,7 +38,7 @@ const Addevent = () => {
     <div className={styles.cardcontainer}>  
       {data.map((item) => (  
         <div  
-          className={`${styles.card} ${hoveredCard ===` ${styles.item.id} ? ${styles.hovered} : ''`}`}  
+          className={`${styles.card} ${hoveredCard ===` ${styles.item} ? ${styles.hovered} : ''`}`}  
           key={item.id}  
           onMouseEnter={() => handleCardHover(item.id)}  
           onMouseLeave={handleCardLeave}  

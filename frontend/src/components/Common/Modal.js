@@ -1,15 +1,13 @@
 import styles from "../../design/Modal.module.css";
-import React, { useRef, useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import Backdrop from "./Backdrop";
 import { CSSTransition } from "react-transition-group";
 
 const ModalOverlay = (props) => {
-    const [eventData,setEventData]=useState(props.eventData);
-    const editFunction=(e)=>{
-        
-    }
-  const imageRef = useRef(null);
+  const editFunction = (e) => {
+    props.setEditEventData({ ...props.eventData, [e.target.name]: e.target.value });
+  };
   const content = (
     <div className={styles.modal} style={props.style}>
       <header className={styles.modalheader}>
@@ -27,14 +25,16 @@ const ModalOverlay = (props) => {
           <input
             type="text"
             className={styles.formInput}
-            value={eventData.title}
+            value={props.eventData.title}
+            name="title"
+            onChange={editFunction}
           />
           <label className={styles.inpLabel}>Description:</label>
           <textarea
             id="description"
             name="description"
-            value={eventData.description}
-            onChange={"handleChange"}
+            value={props.eventData.description}
+            onChange={editFunction}
             required
             className={styles.formInput}
           ></textarea>
@@ -43,9 +43,16 @@ const ModalOverlay = (props) => {
             type="datetime-local"
             className={styles.formInput}
             value={props.eventData.date}
+            name="date"
+            onChange={editFunction}
           />
           <label className={styles.inpLabel}>Venue:</label>
-          <select className={styles.formSelect} value={eventData.location}>
+          <select
+            className={styles.formSelect}
+            value={props.eventData.location}
+            name="location"
+            onChange={editFunction}
+          >
             <option>Select Venue</option>
             {props.venueList.map((option) => (
               <option key={option._id} value={option._id}>
@@ -59,9 +66,10 @@ const ModalOverlay = (props) => {
           <input
             className={styles.formInput}
             type="file"
-            ref={imageRef}
+            ref={props.editImageRef}
+
           ></input>
-          <button className={styles.updateBtn}>Update</button>
+          <button className={styles.updateBtn} onClick={props.handUpdate}>Update</button>
         </div>
         <footer className={styles.modalfooter}>{props.footer}</footer>
       </form>

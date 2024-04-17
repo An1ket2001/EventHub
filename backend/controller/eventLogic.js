@@ -28,18 +28,17 @@ const createEvent = async (req, res) => {
           subscribers: [],
           titleImage: filename,
         });
-        res.status(200).send("File uploaded to Azure Blob storage.");
+        return res.status(200).send("File uploaded to Azure Blob storage.");
       })
       .catch((err) => {
         if (err) {
           console.log(err);
-          res.status(500).send("Please try again later fromm blob.");
-          return;
+          return res.status(500).send("Please try again later fromm blob.");
         }
       });
   } catch (err) {
     console.log(err);
-    res.status(500).send("Please try again later.");
+    return res.status(500).send("Please try again later.");
   }
 };
 
@@ -115,41 +114,58 @@ const deleteEvent = async (req, res) => {
 
 const updateEvent = async (req, res) => {
   try {
-    const { title, description, locationId, date, eventId } = req.body;
-    const authorId = req.user.id;
-    const filename = req.file.originalname + uuid();
-    const blobService = new BlockBlobClient(
-      process.env.BLOB_URL,
-      "eventhubcontainer",
-      filename
-    );
-    blobService
-      .uploadData(req.file.buffer)
-      .then(async () => {
-        const events = await Event.findById(eventId);
-        if (!events) {
-          res.status(500).send("Internal server error.Please try again later.");
-        }
+    const { title, description, locationId, date, eventId, imagechanged } =
+      req.body;
+    if (imagechanged===true) {
+      const filename = req.file.originalname + uuid();
+      const blobService = new BlockBlobClient(
+        process.env.BLOB_URL,
+        "eventhubcontainer",
+        filename
+      );
+      blobService
+        .uploadData(req.file.buffer)
+        .then(async () => {
+          const events = await Event.findById(eventId);
+          if (!events) {
+            res
+              .status(500)
+              .send("Internal server error.Please try again later.");
+          }
 
-        (events.title = title),
-          (events.description = description),
-          (events.author = authorId),
-          (events.location = locationId),
-          (events.date = date),
-          (events.titleImage = filename);
-        await events.save();
-        res.status(200).send("Updated Succesfully");
-      })
-      .catch((err) => {
-        if (err) {
-          console.log(err);
-          res.status(500).send("Please try again later from blob.");
-          return;
-        }
-      });
+          (events.title = title),
+            (events.description = description),
+            (events.location = locationId),
+            (events.date = date),
+            (events.titleImage = filename);
+          await events.save();
+
+          return res.status(200).send("Updated Succesfully");
+        })
+        .catch((err) => {
+          if (err) {
+            console.log(err);
+            res.status(500).send("Please try again later from blob.");
+            return;
+          }
+        });
+    } else {
+      const events = await Event.findById(eventId);
+      if (!events) {
+        res.status(500).send("Internal server error.Please try again later.");
+      }
+
+      (events.title = title),
+        (events.description = description),
+        (events.location = locationId),
+        (events.date = date),
+      await events.save();
+
+      return res.status(200).send("Updated Succesfully");
+    }
   } catch (err) {
     console.log(err);
-    res.status(500).send("Please try again later.");
+    return res.status(500).send("Please try again later.");
   }
 };
 
@@ -177,11 +193,12 @@ const subscribeEvent = async (req, res) => {
 const getSubscribedEvents = async (req, res) => {
   try {
     const userId = req.user.id;
-    let events = await Event.aggregate([{
-        $match:{
-            subscribers:new mongoose.Types.ObjectId(userId)
-        }
-    },
+    let events = await Event.aggregate([
+      {
+        $match: {
+          subscribers: new mongoose.Types.ObjectId(userId),
+        },
+      },
       {
         $lookup: {
           from: "locations",
@@ -189,9 +206,9 @@ const getSubscribedEvents = async (req, res) => {
           foreignField: "_id",
           as: "locatio",
         },
-      }
+      },
     ]);
-    
+
     return res.status(200).json(events);
   } catch (err) {
     console.log(err);

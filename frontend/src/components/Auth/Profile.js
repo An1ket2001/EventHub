@@ -2,14 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "../../design/Profile.module.css";
 import { AuthContext } from "../../shared/AuthContext";
 import Subsevent from "../Events/Subsevent";
+import Spinner from "../Events/Spinner";
 
 const Profile = () => {
   const auth = useContext(AuthContext);
   const [userData, setUserData] = useState([]);
   const [subscribedEvent,setSubscribedEvent]=useState([]);
+  const [isspinner,setisspinner]=useState(false);
   useEffect(() => {
     if (auth.token !== "") {
       const fetchUserData = async () => {
+        setisspinner(true);
         const res = await fetch("http://localhost:5000/api/auth/getUser", {
           method: "GET",
           headers: {
@@ -18,8 +21,10 @@ const Profile = () => {
         });
         const data = await res.json();
         setUserData(data[0]);
+        setisspinner(false);
       };
       const fetchSubscribedData = async () => {
+        setisspinner(true);
         const res = await fetch("http://localhost:5000/api/events/getSubscribedEvents", {
           method: "GET",
           headers: {
@@ -28,6 +33,7 @@ const Profile = () => {
         });
         const data = await res.json();
         setSubscribedEvent(data);
+        setisspinner(false);
       };
       fetchSubscribedData();
       fetchUserData();
@@ -38,6 +44,7 @@ const Profile = () => {
 
   return (
     <>
+    {isspinner && <Spinner />}
     <div className={styles.profilepage}>
       <div className={styles.profileheader}>
         <img

@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 50px;
-  background-color: #f2f2f2;
+  background-color: #eae4e4;
   margin-bottom: 30px;
   /* width: 40%; */
   /* margin-top: 2%;
@@ -20,15 +20,16 @@
     background-color: transparent;  
     cursor: pointer;  
     transition: background-color 0.3s;  
-    color: blue;
+    color: rgb(10, 10, 42);
+    font-size: 1.1rem;
   }  
     
   .eventbutton:hover {  
-    background-color: #ddd;  
+    background-color: #efc1ad;  
   }  
     
   .eventbutton.selected {  
-    background-color: #333;  
-    color: #ff0b1b;  
+    background-color: #bdb5b0;  
+    color: rgb(10, 10, 42);  
   }  
   

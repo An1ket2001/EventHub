@@ -16,7 +16,8 @@
     border: 1px solid #ccc;  
     border-radius: 5px;  
     text-align: center;  
-    background-color: rgb(197, 224, 226);  
+    background-color: rgb(241, 237, 236); 
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);; 
   }  
     
   @media (max-width: 768px) {  
@@ -43,15 +44,17 @@
   }  
     
   .read-more-button {  
-    background-color: #082a4e;  
-    color: #fff;  
+    background-color: rgb(238, 162, 133);  
+    color: #310202;  
     border: none;  
     padding: 10px 20px;  
     border-radius: 5px;  
     cursor: pointer;  
+    border: 1px solid rgb(247, 108, 58);
+    font-weight: bold;
   }  
     
   .read-more-button:hover {  
-    background-color: #0056b3;  
+    background-color: rgb(235, 126, 84)
   }  
   

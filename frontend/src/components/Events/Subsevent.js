@@ -2,7 +2,7 @@ import React from 'react';
 import '../../design/Subsevent.css';  
   
 const Subsevent = ({events,handleEdit}) => { 
-  console.log(events); 
+  // console.log(events); 
   // const events = [  
   //   {  
   //     id: 1,  
@@ -44,7 +44,7 @@ const Subsevent = ({events,handleEdit}) => {
   
   return (  
     <div className="subscribed-events-page">  
-      <h1>Subscribed Events</h1>  
+      <h1>Created Events</h1>  
       <div className="event-cards">  
         {events.map((event) => (  
           <div key={event._id} className="event-card">  

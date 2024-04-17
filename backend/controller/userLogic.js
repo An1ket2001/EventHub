@@ -56,7 +56,7 @@ const createuser = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
-      res.status(400).json({ error: "Email already exists" });
+      return res.status(400).json({ error: "Email already exists" });
     }
     const salt = await bcrypt.genSaltSync(10);
     const secpass = await bcrypt.hash(req.body.password, salt);
@@ -76,9 +76,9 @@ const createuser = async (req, res) => {
     };
     //The Jsonweb token which we create has three part 1.algorithm 2.data 3.signature(JWT_SECRET)
     const authtoken = jwt.sign(data, JWT_SECRET);
-    return res.status(200).json({ authtoken,"designation":userDesignation.designation });
+    return res.status(200).json({ authtoken,"designation":userDesignation.designation, "name":user.name });
   } catch (err) {
-    console.error(err.message);
+    console.log(err);
     return res.status(500).send("Some Error Please Try Again!!");
   }
 };
@@ -107,7 +107,7 @@ const login = async (req, res) => {
       },
     };
     const authtoken = jwt.sign(data, JWT_SECRET);
-    res.status(200).json({ authtoken,"designation":userDesignation.designation });
+    res.status(200).json({ authtoken,"designation":userDesignation.designation, "name":user.name });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Something went wrong" });

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "../../design/Eventcard.module.css";
 import {useNavigate} from "react-router-dom";
+import { AuthContext } from "../../shared/AuthContext";
 
 const Eventcard = (props) => {
+    const auth = useContext(AuthContext);
     const navigate=useNavigate();
     const dateTimeInput=props.dateTime;
     const new_datetime=new Date(dateTimeInput);
@@ -19,7 +21,12 @@ const Eventcard = (props) => {
         );
     }
     const handlereadmore=()=>{
+        if(auth.token==="")
+        {
+            navigate("/login");
+        }else{
         navigate(`/event/${props.id}`);
+        }
     }
     return (
 

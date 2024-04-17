@@ -38,5 +38,9 @@ img {
         background-color:rgb(197, 224, 226);
         border-radius: 5px;
         border: 1.5px solid grey;
+        cursor: pointer;
 
+    }
+    .cardbody{
+      text-align: center;
     }

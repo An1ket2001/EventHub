@@ -1,10 +1,13 @@
 .eventbar {  
-    display: flex;  
-    justify-content: center;  
-    align-items: center;  
-    height: 50px;  
-    background-color: #f2f2f2; 
-    margin-bottom: 30px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background-color: #f2f2f2;
+  margin-bottom: 30px;
+  /* width: 40%; */
+  /* margin-top: 2%;
+  margin-left: 30%;  */
   }  
     
   .eventbutton {  

@@ -44,7 +44,7 @@ const Subsevent = ({events}) => {
   
   return (  
     <div className="subscribed-events-page">  
-      <h1>Subscribed Events</h1>  
+      <h1>Created Events</h1>  
       <div className="event-cards">  
         {events.map((event) => (  
           <div key={event._id} className="event-card">  

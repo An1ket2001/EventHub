@@ -31,15 +31,16 @@
 .submitBtn {
   padding: 10px 20px;
   margin-top: 10px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: rgb(238, 162, 133);
+  color: #0c0101;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 15px;
 }
 
 .submitBtn:hover {
-  background-color: #0056b3;
+  background-color: rgb(250, 97, 36);
 }
 
 .formSelect {

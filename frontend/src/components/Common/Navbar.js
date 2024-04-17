@@ -45,6 +45,7 @@ const Navbar = () => {
                         
                         {
                             auth.isLoggedIn &&
+                            <li className={styles.navitem}>
                             <NavLink
                                 exact
                                 to="/profile"
@@ -53,7 +54,7 @@ const Navbar = () => {
                                 onClick={click ? handleClick : null}
                             >
                                 Profile
-                            </NavLink>
+                            </NavLink></li>
                         }
                         {auth.isLoggedIn === false ?
                             (<li className={styles.navitem}>

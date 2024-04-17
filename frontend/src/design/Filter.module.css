@@ -6,10 +6,14 @@
   }  
     
   .filterbox {  
-    border-radius: 10px;  
+    /* border-radius: 10px;   */
     background-color: #f2f2f2;  
     padding: 20px;  
-    width: 300px;  
+    width: 225px;  
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 130px ;
   }  
     
   .filterfields {  
@@ -19,11 +23,13 @@
   .locationinput,  
   .dateinput {  
     margin-bottom: 10px;  
+    width: 100%;
   }  
     
   .locationinput label,  
   .dateinput label {  
-    margin-right: 10px;  
+    margin-right: 10px; 
+     
   }  
     
   .locationinput select,  
@@ -32,21 +38,27 @@
     border-radius: 5px;  
     border: 1px solid #ccc;  
     width: 100%;  
+    margin-bottom: 5px;
   }  
     
   .filterbutton {  
-    padding: 10px 20px;  
+    margin-top: 7px;
+    padding: 7px 16px;  
     border-radius: 5px;  
-    background-color: #286aa7;  
+    background-color: rgb(238, 162, 133);  
     color: #fff;  
     border: none;  
     cursor: pointer;  
     margin-bottom: 8px;
+    border: 1px solid grey;
+    color: #04051f;
+    font-size: 13px;
+    margin-left: 5px;
 
 
   }  
     
   .filterbutton:hover {  
-    background-color: #060a4f;  
+    background-color: #e37425;  
   }  
   

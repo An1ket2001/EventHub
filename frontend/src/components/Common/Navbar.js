@@ -17,7 +17,7 @@ const Navbar = () => {
             <nav className={styles.navbar} onClick={e => e.stopPropagation()}>
                 <div className={styles.navcontainer}>
                     <NavLink exact to="/" className={styles.navlogo}>
-                        <i className={`${styles.fa} ${styles.facode}`}>Event-Hub</i>
+                        <h3 className={`${styles.fa} ${styles.facode}`}>EventHub</h3>
                     </NavLink>
                     <ul className={click ? `${styles.navmenu} ${styles.active}` :`${styles.navmenu}`}>
                         <li className={styles.navitem}>

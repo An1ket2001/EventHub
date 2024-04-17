@@ -12,7 +12,7 @@
   .modalheader {
     width: 97.5%;
     padding: 1rem 0.5rem;
-    background: #2a006e;
+    background: #ff5a09;
     color: white;
   }
   
@@ -21,7 +21,7 @@
   }
   
   .modalcontent {
-    padding: 1rem 0.5rem;
+    padding-left: 30px;
   }
   
   .modalfooter {
@@ -61,10 +61,10 @@
     flex-direction: column; */
     margin: 0 auto;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
     background-color: #f2f2f2;
     overflow:scroll;
-    height:400px;
+    height:370px;
   }
   .form::-webkit-scrollbar {
     display: none;
@@ -94,7 +94,7 @@
   .submitBtn {
     padding: 10px 20px;
     margin-top: 10px;
-    background-color: #007bff;
+    background-color: rgb(238, 162, 133);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -102,7 +102,7 @@
   }
   
   .submitBtn:hover {
-    background-color: #0056b3;
+    background-color: rgb(250, 97, 36);
   }
   
   .formSelect {
@@ -126,8 +126,8 @@
   .updateBtn{
     width: 100px;
     padding:10px;
-    border-radius: 20px;
-    background-color: #0736b8;
+    border-radius: 10px;
+    background-color: rgb(250, 97, 36);
     color:white;
     font-weight: 400;
     font-size: 14px;
@@ -137,5 +137,5 @@
   }
   .updateBtn:hover{
     cursor: pointer;
-    background-color:rgb(130, 212, 6);
+    background-color:rgb(238, 162, 133);
   }

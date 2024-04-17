@@ -173,13 +173,17 @@ const subscribeEvent = async (req, res) => {
   try {
     const { eventId } = req.body;
     const userId = req.user.id;
-    console.log(userId);
     const user = await User.findById(userId);
     if (!user) {
       return res.status(400).send("Invalid User");
     }
     let events = await Event.findById(eventId);
-    events.subscribers.push(userId);
+    if(events.subscribers.some((sub)=>sub.toString()===userId))
+    {
+        events.subscribers=events.subscribers.filter((sub)=>sub.toString()!==userId);
+    }else{
+        events.subscribers.push(userId);
+    }
     await events.save();
     return res.status(200).send("Subscribed successfully");
   } catch (err) {
@@ -242,7 +246,7 @@ const getMyEvents = async (req, res) => {
 const getSpecificEvents = async (req, res) => {
   try {
     const eventId = req.params["id"];
-    console.log(eventId);
+    const userId = req.user.id;
     const event = await Event.aggregate([
       {
         $match: { _id: new mongoose.Types.ObjectId(eventId) },
@@ -256,6 +260,12 @@ const getSpecificEvents = async (req, res) => {
         },
       },
     ]);
+    event[0].isSubscribed =false;
+    if(event[0].subscribers.some((subs)=>subs.toString()==userId))
+    {
+        isSubscribed=true;
+        event[0].isSubscribed=isSubscribed;
+    }
     return res.status(200).json(event);
   } catch (err) {
     console.log(err);

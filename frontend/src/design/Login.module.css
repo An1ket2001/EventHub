@@ -70,7 +70,7 @@
     
   .gray {  
     background-color: #9c9c9c;  
-    cursor: not-allowed;  
+    cursor: pointer;  
   }  
     
   .error {  

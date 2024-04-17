@@ -21,6 +21,7 @@ const Addform = () => {
   const [showModal, setShowModal] = useState(false);
   const [editEventData, setEditEventData] = useState({});
   const [isspinning, setisspinning] = useState(false);
+  const [refresh,setRefresh]=useState(false);
   
 
   const handleChange = (e) => {
@@ -56,6 +57,21 @@ const Addform = () => {
     setShowModal(true);
     setEditEventData(editData);
   };
+
+  const handleDelete=async(id)=>{
+    const res = await fetch("http://localhost:5000/api/events/deleteEvents",{
+      method:"DELETE",
+      headers:{
+        "content-type":"application/json",
+        "Authorization":`Bearer ${auth.token}`
+      },
+      body:JSON.stringify({"eventId":id})
+    })
+    if(res.ok)
+    {
+      setRefresh(!refresh);
+    }
+  }
 
   const imageRef = useRef(null);
   const editImageRef = useRef(null);
@@ -119,7 +135,7 @@ const Addform = () => {
     } else {
       auth.login();
     }
-  }, [auth.token]);
+  }, [auth.token,refresh]);
 
   return (
     <>
@@ -199,7 +215,7 @@ const Addform = () => {
       </form>
       {/* <MyCreatedevent /> */}
       <br />
-      <Subsevent events={createdEvents} handleEdit={handleEdit} />
+      <Subsevent events={createdEvents} handleEdit={handleEdit} title={"Created Events"} createPage={3} handleDelete={handleDelete} />
     </>
   );
 };

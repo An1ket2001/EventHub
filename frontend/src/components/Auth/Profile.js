@@ -60,7 +60,7 @@ const Profile = () => {
         <p>{userData.email}</p>
       </div>
     </div>
-    <Subsevent events={subscribedEvent}/>
+    <Subsevent events={subscribedEvent} title={"Subscribed Events"} createPage={false}/>
     </>
   );
 };

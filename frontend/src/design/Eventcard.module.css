@@ -49,5 +49,6 @@ img {
       background-color: #e37425;  
     }  
     .cardbody{
-      text-align: left;
+      text-align: center;
+      width:30%;
     }

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "../../design/ReadMore.module.css";
 import { AuthContext } from "../../shared/AuthContext";
-
+import {toast } from 'react-toastify';
 
 
 
@@ -27,7 +27,7 @@ const ReadMore = () => {
             },
             body: JSON.stringify({ eventId: eventData._id })
         });
-        console.log(subevent);
+        // console.log(subevent);
     }
 
     useEffect(() => {
@@ -44,7 +44,7 @@ const ReadMore = () => {
                     }
                 );
                 const data = await res.json();
-                console.log(data);
+                // console.log(data);
                 setEventData(data[0]);
             };
             getEventDetails();

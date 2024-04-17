@@ -48,45 +48,62 @@ const LoginSignup = () => {
     const validationErrors = {};
 
     if (action === "Login") {
+      
       if (!email) {
-        validationErrors.username = "Email is required";
+        validationErrors.email = "Email is required";
+        
       }
       if (!password) {
         validationErrors.password = "Password is required";
+        
       } else if (password.length < 6) {
         validationErrors.password = "Password should be at least 6 characters long";
+        
       }
-      toast.success("Successfully LoggedIn!");
+     
+  
     } else {
+      
       if (!username) {
         validationErrors.username = "Username is required";
+        
+        
       }
       if (!email) {
         validationErrors.email = "Email is required";
+        
       } else if (!/\S+@\S+\.\S+/.test(email)) {
         validationErrors.email = "Invalid email format";
+       
       }
       if (!password) {
         validationErrors.password = "Password is required";
+        
       } else if (password.length < 6) {
         validationErrors.password = "Password should be at least 6 characters long";
+        
       }
       if (!confirmPassword) {
         validationErrors.confirmPassword = "Confirm Password is required";
+       
       } else if (confirmPassword !== password) {
         validationErrors.confirmPassword = "Passwords do not match";
+        
       }
       if (!designation) {
         validationErrors.designation = "Designation is required";
+        
       }
-      // toast.success("Successfully SignedUp!");
+      
     }
 
     if (Object.keys(validationErrors).length === 0) {
       if (action === "Login") {
-        AuthApi("login", { email, password })
+        AuthApi("login", { email, password });
+        toast.success("Successfully LoggedIn!");
       } else {
-        AuthApi("createuser", { "name": username, email, password, "designationId": designation })
+        AuthApi("createuser", { "name": username, email, password, "designationId": designation });
+        toast.success("Successfully SignnedUp!");
       }
       setErrors({});
     } else {

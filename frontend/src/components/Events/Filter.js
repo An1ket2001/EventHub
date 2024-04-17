@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';  
 import styles from "../../design/Filter.module.css"
 import { AuthContext } from '../../shared/AuthContext';
+import {toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
   
-const Filter = ({filters,setFilters}) => {  
+const Filter = ({filters,setFilters}) => { 
+
   const auth=useContext(AuthContext);
   const [venueList, setVenueList] = useState([]);
   const [location, setLocation] = useState('');  
@@ -18,9 +21,11 @@ const Filter = ({filters,setFilters}) => {
   
   const handleFilter = () => {  
     // Perform filtering logic here  
+    toast.success("Succesfully applied filter");
     setFilters({...filters,location:location,date:selectedDate})
   };  
   const handleRemoveFilter=()=>{
+    toast.success("Succesfully Removed filter");
     setFilters({...filters,date:"",location:"",})
   }
   useEffect(()=>{
@@ -71,6 +76,7 @@ const Filter = ({filters,setFilters}) => {
         </div>  
         <button className={styles.filterbutton} onClick={handleFilter}>Apply Filter</button>
         <button className={styles.filterbutton} onClick={handleRemoveFilter}>Remove Filter</button>  
+        {/* <ToastContainer /> */}
       </div>  
     </div>  
   );  

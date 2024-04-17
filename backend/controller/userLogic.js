@@ -56,7 +56,7 @@ const createuser = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
-      res.status(400).json({ error: "Email already exists" });
+      return res.status(400).json({ error: "Email already exists" });
     }
     const salt = await bcrypt.genSaltSync(10);
     const secpass = await bcrypt.hash(req.body.password, salt);

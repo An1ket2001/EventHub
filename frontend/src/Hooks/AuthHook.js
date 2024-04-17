@@ -8,7 +8,7 @@ export const useAuth = () => {
     const userData = JSON.parse(localStorage.getItem("user"));
     if (userData) {
         setToken(userData.authtoken)
-        console.log(userData.authtoken);
+        // console.log(userData.authtoken);
         setIsLoggedIn(true);
       if (userData.designation === "HR") {
         setIsUserHr(true);

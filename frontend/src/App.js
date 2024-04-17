@@ -8,6 +8,7 @@ import {useAuth} from './Hooks/AuthHook';
 import { AuthContext } from './shared/AuthContext';
 import Profile from "./components/Auth/Profile";
 import ReadMore from './components/Events/ReadMore';
+import {ToastContainer} from 'react-toastify'
 import {
   BrowserRouter as Router,
   Routes,
@@ -26,7 +27,7 @@ return (
       <Router>
         
           <Navbar/>
-
+          <ToastContainer/>
         
         <div className="container">
           <Routes>

@@ -3,7 +3,8 @@ import styles from '../../design/Login.module.css';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../shared/AuthContext";
 import Spinner from '../Events/Spinner';
-
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 const LoginSignup = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
@@ -47,43 +48,62 @@ const LoginSignup = () => {
     const validationErrors = {};
 
     if (action === "Login") {
+      
       if (!email) {
-        validationErrors.username = "Email is required";
+        validationErrors.email = "Email is required";
+        
       }
       if (!password) {
         validationErrors.password = "Password is required";
+        
       } else if (password.length < 6) {
         validationErrors.password = "Password should be at least 6 characters long";
+        
       }
+     
+  
     } else {
+      
       if (!username) {
         validationErrors.username = "Username is required";
+        
+        
       }
       if (!email) {
         validationErrors.email = "Email is required";
+        
       } else if (!/\S+@\S+\.\S+/.test(email)) {
         validationErrors.email = "Invalid email format";
+       
       }
       if (!password) {
         validationErrors.password = "Password is required";
+        
       } else if (password.length < 6) {
         validationErrors.password = "Password should be at least 6 characters long";
+        
       }
       if (!confirmPassword) {
         validationErrors.confirmPassword = "Confirm Password is required";
+       
       } else if (confirmPassword !== password) {
         validationErrors.confirmPassword = "Passwords do not match";
+        
       }
       if (!designation) {
         validationErrors.designation = "Designation is required";
+        
       }
+      
     }
 
     if (Object.keys(validationErrors).length === 0) {
       if (action === "Login") {
-        AuthApi("login", { email, password })
+        AuthApi("login", { email, password });
+        toast.success("Successfully LoggedIn!");
       } else {
-        AuthApi("createuser", { "name": username, email, password, "designationId": designation })
+        AuthApi("createuser", { "name": username, email, password, "designationId": designation });
+        toast.success("Successfully SignnedUp!");
       }
       setErrors({});
     } else {
@@ -171,6 +191,7 @@ const LoginSignup = () => {
         <button className={`${styles.submit} ${styles.gray}`} onClick={() => handleActionChange(action === "Login" ? "Sign Up" : "Login")}>
           {action === "Login" ? "Sign Up" : "Login"}
         </button>
+        <ToastContainer />
       </div>
     </div>
     </>

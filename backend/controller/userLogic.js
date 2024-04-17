@@ -76,9 +76,9 @@ const createuser = async (req, res) => {
     };
     //The Jsonweb token which we create has three part 1.algorithm 2.data 3.signature(JWT_SECRET)
     const authtoken = jwt.sign(data, JWT_SECRET);
-    return res.status(200).json({ authtoken,"designation":userDesignation.designation, "name":user.name });
+    return res.status(200).json({ authtoken,"designation":userDesignation.designation, "name":real_user.name });
   } catch (err) {
-    console.log(err);
+    // console.error(err.message);
     return res.status(500).send("Some Error Please Try Again!!");
   }
 };

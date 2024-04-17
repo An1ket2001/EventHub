@@ -6,6 +6,7 @@ import { AuthContext } from "../../shared/AuthContext";
 import Subsevent from "./Subsevent";
 import Modal from "../Common/Modal";
 import Spinner from "./Spinner";
+import {toast } from 'react-toastify';
 
 const Addform = () => {
   const auth = useContext(AuthContext);
@@ -78,6 +79,7 @@ const Addform = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    toast.success("Event Added Succesfully")
     const data = new FormData();
     data.append("title", eventData.title);
     data.append("description", eventData.description);

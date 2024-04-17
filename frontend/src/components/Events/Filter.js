@@ -66,9 +66,10 @@ const Filter = ({filters,setFilters}) => {
               value={selectedDate}  
               onChange={handleDateChange}  
             />  
-          </div>  
+          </div> 
+         
         </div>  
-        <button className={styles.filterbutton} onClick={handleFilter}>Apply Filter</button><br/>  
+        <button className={styles.filterbutton} onClick={handleFilter}>Apply Filter</button>
         <button className={styles.filterbutton} onClick={handleRemoveFilter}>Remove Filter</button>  
       </div>  
     </div>  

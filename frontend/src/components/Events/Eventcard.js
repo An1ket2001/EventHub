@@ -34,11 +34,11 @@ const Eventcard = (props) => {
             <img src={`http://localhost:5000/api/events/getEventImage/${props.titleImage}`} alt="Img" className={styles.cardimg} />
             <div className={styles.cardbody}>
                 <h2 className={styles.cardtitle}>{props.title}</h2>
-                <br />
                 <p className={styles.carddescription}>{props.description}</p>
-                <h3 className={styles.cardpricing}>Date: {date}</h3>
-                <h3 className={styles.cardpricing}>Time: {time}</h3>
-                <h3 className={styles.cardpricing}>Venue: {props.location[0].location}</h3>
+                <br />
+                <h4 className={styles.cardpricing}>Date: {date}</h4>
+                <h4 className={styles.cardpricing}>Time: {time}</h4>
+                <h4 className={styles.cardpricing}>Venue: {props.location[0].location}</h4>
 
                 <button className={styles.cardbtn} onClick={handlereadmore}>Read More</button>
                 <button className={styles.cardbtn} onClick={handlefunction}>Subscribe</button>

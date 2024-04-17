@@ -53,8 +53,9 @@ const Navbar = () => {
                                 className={styles.navlinks}
                                 onClick={click ? handleClick : null}
                             >
-                                Profile
-                            </NavLink></li>
+                                 {JSON.parse(localStorage.getItem("user")).name}
+                            </NavLink>
+                            </li>
                         }
                         {auth.isLoggedIn === false ?
                             (<li className={styles.navitem}>

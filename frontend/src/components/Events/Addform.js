@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import MyCreatedevent from './MyCreatedevent';
 import { AuthContext } from '../../shared/AuthContext';
 import Subsevent from './Subsevent';
+import Modal from '../Common/Modal';
 
 const Addform = () => {
   const auth=useContext(AuthContext);
@@ -16,10 +17,17 @@ const Addform = () => {
     locationId: ''
   });
   const [createdEvents,setCreatedEvents]=useState([]);
+  const [showModal,setShowModal]=useState(false);
+  const [editEventData,setEditEventData]=useState({});
 
   const handleChange = (e) => {
     setEventData({ ...eventData, [e.target.name]: e.target.value });
   };
+
+  const handleEdit=(editData)=>{
+    setShowModal(true);
+    setEditEventData(editData);
+  }
 
   const imageRef=useRef(null);
 
@@ -86,6 +94,7 @@ const Addform = () => {
 
   return (
     <>
+    <Modal show={showModal} setShowModal={setShowModal} eventData={editEventData} venueList={venueList} />
     <form className={styles.form} onSubmit={handleSubmit}>
       <label className={styles.inpLabel} htmlFor="eventName">Name of Event:</label>
       <input
@@ -142,7 +151,7 @@ const Addform = () => {
     </form>
     {/* <MyCreatedevent /> */}
     <br/>
-    <Subsevent events={createdEvents}/>
+    <Subsevent events={createdEvents} handleEdit={handleEdit}/>
     </>
   );
 };

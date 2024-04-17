@@ -1,7 +1,7 @@
 import React from 'react';  
 import '../../design/Subsevent.css';  
   
-const Subsevent = ({events}) => { 
+const Subsevent = ({events,handleEdit}) => { 
   console.log(events); 
   // const events = [  
   //   {  
@@ -52,7 +52,8 @@ const Subsevent = ({events}) => {
             <h2>{event.title}</h2>  
             <p>{event.description}</p>  
             <p>Venue: {event.locatio[0].location}</p>  
-            <button className="read-more-button">Read More</button>  
+            <button className="read-more-button" onClick={()=>handleEdit(event)}>Edit</button>  
+            <button className="read-more-button">Delete</button>  
           </div>  
         ))}  
       </div>  

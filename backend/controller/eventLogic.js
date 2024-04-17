@@ -225,9 +225,10 @@ const getMyEvents = async (req, res) => {
 const getSpecificEvents = async (req, res) => {
   try {
     const eventId = req.params["id"];
+    console.log(eventId);
     const event = await Event.aggregate([
       {
-        $match: { _id: eventId },
+        $match: { _id: new mongoose.Types.ObjectId(eventId) },
       },
       {
         $lookup: {

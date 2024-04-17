@@ -6,6 +6,7 @@ import Subsevent from "../Events/Subsevent";
 const Profile = () => {
   const auth = useContext(AuthContext);
   const [userData, setUserData] = useState([]);
+  const [subscribedEvent,setSubscribedEvent]=useState([]);
   useEffect(() => {
     if (auth.token !== "") {
       const fetchUserData = async () => {
@@ -18,6 +19,17 @@ const Profile = () => {
         const data = await res.json();
         setUserData(data[0]);
       };
+      const fetchSubscribedData = async () => {
+        const res = await fetch("http://localhost:5000/api/events/getSubscribedEvents", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        });
+        const data = await res.json();
+        setSubscribedEvent(data);
+      };
+      fetchSubscribedData();
       fetchUserData();
     } else {
       auth.login();
@@ -41,7 +53,7 @@ const Profile = () => {
         <p>{userData.email}</p>
       </div>
     </div>
-    <Subsevent />
+    <Subsevent events={subscribedEvent}/>
     </>
   );
 };

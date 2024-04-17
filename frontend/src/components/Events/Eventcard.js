@@ -29,13 +29,12 @@ const Eventcard = (props) => {
                 <h2 className={styles.cardtitle}>{props.title}</h2>
                 <br />
                 <p className={styles.carddescription}>{props.description}</p>
-                <h3 className={styles.cardpricing}>{date}</h3>
-                <h3 className={styles.cardpricing}>{time}</h3>
-                <h3 className={styles.cardpricing}>{props.location[0].location}</h3>
+                <h3 className={styles.cardpricing}>Date: {date}</h3>
+                <h3 className={styles.cardpricing}>Time: {time}</h3>
+                <h3 className={styles.cardpricing}>Venue: {props.location[0].location}</h3>
 
                 <button className={styles.cardbtn} onClick={handlereadmore}>Read More</button>
                 <button className={styles.cardbtn} onClick={handlefunction}>Subscribe</button>
-                
             </div>
         </div>
     );

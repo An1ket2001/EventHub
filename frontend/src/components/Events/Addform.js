@@ -3,6 +3,7 @@ import styles from  '../../design/Addform.module.css';
 import { useNavigate } from "react-router-dom";
 import MyCreatedevent from './MyCreatedevent';
 import { AuthContext } from '../../shared/AuthContext';
+import Subsevent from './Subsevent';
 
 const Addform = () => {
   const auth=useContext(AuthContext);
@@ -14,6 +15,7 @@ const Addform = () => {
     date: '',
     locationId: ''
   });
+  const [createdEvents,setCreatedEvents]=useState([]);
 
   const handleChange = (e) => {
     setEventData({ ...eventData, [e.target.name]: e.target.value });
@@ -61,7 +63,19 @@ const Addform = () => {
         const data = await res.json();
         setVenueList(data);
       }
+      const fetchCreatedEvents=async()=>{
+        const res = await fetch("http://localhost:5000/api/events/myCreatedEvents",{
+          method:"GET",
+          headers:{
+            "Authorization":`Bearer ${auth.token}`
+          }
+        })
+        const data=await res.json();
+        setCreatedEvents(data);
+        
+      }
       fetchVenue();
+      fetchCreatedEvents();
     }
     else{
       auth.login();
@@ -126,7 +140,9 @@ const Addform = () => {
 
       <button className={styles.submitBtn} type="submit">Submit</button>
     </form>
-    <MyCreatedevent />
+    {/* <MyCreatedevent /> */}
+    <br/>
+    <Subsevent events={createdEvents}/>
     </>
   );
 };

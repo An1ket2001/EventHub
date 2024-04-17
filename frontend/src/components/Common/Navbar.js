@@ -42,6 +42,19 @@ const Navbar = () => {
                                 Add-Event
                             </NavLink>
                         </li>}
+                        
+                        {
+                            auth.isLoggedIn &&
+                            <NavLink
+                                exact
+                                to="/profile"
+                                activeclassname={styles.active}
+                                className={styles.navlinks}
+                                onClick={click ? handleClick : null}
+                            >
+                                Profile
+                            </NavLink>
+                        }
                         {auth.isLoggedIn === false ?
                             (<li className={styles.navitem}>
                                 <NavLink
@@ -66,18 +79,6 @@ const Navbar = () => {
                                     Log Out
                                 </NavLink>
                             </li>)}
-                        {
-                            auth.isLoggedIn &&
-                            <NavLink
-                                exact
-                                to="/profile"
-                                activeclassname={styles.active}
-                                className={styles.navlinks}
-                                onClick={click ? handleClick : null}
-                            >
-                                Profile
-                            </NavLink>
-                        }
                     </ul>
                     <div className={styles.navicon} onClick={handleClick}>
                         {click ? <FaTimes /> : <FaBars />}

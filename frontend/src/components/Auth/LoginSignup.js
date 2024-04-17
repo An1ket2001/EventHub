@@ -3,7 +3,8 @@ import styles from '../../design/Login.module.css';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../shared/AuthContext";
 import Spinner from '../Events/Spinner';
-
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 const LoginSignup = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
@@ -55,6 +56,7 @@ const LoginSignup = () => {
       } else if (password.length < 6) {
         validationErrors.password = "Password should be at least 6 characters long";
       }
+      toast.success("Successfully LoggedIn!");
     } else {
       if (!username) {
         validationErrors.username = "Username is required";
@@ -77,6 +79,7 @@ const LoginSignup = () => {
       if (!designation) {
         validationErrors.designation = "Designation is required";
       }
+      // toast.success("Successfully SignedUp!");
     }
 
     if (Object.keys(validationErrors).length === 0) {
@@ -171,6 +174,7 @@ const LoginSignup = () => {
         <button className={`${styles.submit} ${styles.gray}`} onClick={() => handleActionChange(action === "Login" ? "Sign Up" : "Login")}>
           {action === "Login" ? "Sign Up" : "Login"}
         </button>
+        <ToastContainer />
       </div>
     </div>
     </>

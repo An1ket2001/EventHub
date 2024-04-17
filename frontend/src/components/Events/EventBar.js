@@ -12,13 +12,13 @@ const EventBar = ({filters,setFilters}) => {
   return (  
     <div className={styles.eventbar}>  
       <button  
-        className={`${styles.eventbutton} ${selectedButton === "past" ?` ${styles.selected}` : ''}`}  
+        className={`${styles.eventbutton} ${selectedButton === "past" ? `${styles.selected}` : ''}`}  
         onClick={() => handleButtonClick('past')}  
       >  
         Past Events  
       </button>  
       <button  
-        className={`${styles.eventbutton} ${selectedButton === "upcoming" ?` ${styles.selected}` : ''}`}  
+        className={`${styles.eventbutton} ${selectedButton === "upcoming" ? `${styles.selected}` : ''}`} 
         onClick={() => handleButtonClick('upcoming')}  
       >  
         Upcoming Events  

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import styles from '../../design/Login.module.css';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../shared/AuthContext";
+import Spinner from '../Events/Spinner';
 
 const LoginSignup = () => {
   const auth = useContext(AuthContext);
@@ -14,6 +15,7 @@ const LoginSignup = () => {
   const [designation, setDesignation] = useState("");
   const [errors, setErrors] = useState({});
   const [designationList, setDesignationList] = useState([]);
+  const [runspinner,setrunspinner]=useState(false);
 
   const handleActionChange = (newAction) => {
     setAction(newAction);
@@ -90,6 +92,7 @@ const LoginSignup = () => {
   };
 
   const AuthApi = async (endpoint, data) => {
+    setrunspinner(true);
     const res = await fetch(`http://localhost:5000/api/auth/${endpoint}`, {
       method: "POST",
       headers: {
@@ -100,6 +103,7 @@ const LoginSignup = () => {
     const userData = await res.json();
     localStorage.setItem("user", JSON.stringify(userData));
     auth.login();
+    setrunspinner(false);
     navigate("/");
   }
 
@@ -113,6 +117,8 @@ const LoginSignup = () => {
   }, [])
 
   return (
+    <>
+    {runspinner && <Spinner />}
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.text}>{action}</div>
@@ -167,6 +173,7 @@ const LoginSignup = () => {
         </button>
       </div>
     </div>
+    </>
   )
 }
 

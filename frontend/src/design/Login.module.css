@@ -69,7 +69,7 @@
   }  
     
   .gray {  
-    background-color: #ccc;  
+    background-color: #9c9c9c;  
     cursor: not-allowed;  
   }  
     
@@ -90,7 +90,8 @@
     }  
     
     .submitContainer {  
-      flex-direction: column;  
+      flex-direction: column; 
+      cursor: pointer;
     }  
     
     .submit {  

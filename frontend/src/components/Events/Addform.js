@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import MyCreatedevent from './MyCreatedevent';
 import { AuthContext } from '../../shared/AuthContext';
 import Subsevent from './Subsevent';
+import Spinner from './Spinner';
 
 const Addform = () => {
   const auth=useContext(AuthContext);
@@ -16,6 +17,7 @@ const Addform = () => {
     locationId: ''
   });
   const [createdEvents,setCreatedEvents]=useState([]);
+  const [isspinning,setisspinning]=useState(false);
 
   const handleChange = (e) => {
     setEventData({ ...eventData, [e.target.name]: e.target.value });
@@ -64,6 +66,7 @@ const Addform = () => {
         setVenueList(data);
       }
       const fetchCreatedEvents=async()=>{
+        setisspinning(true);
         const res = await fetch("http://localhost:5000/api/events/myCreatedEvents",{
           method:"GET",
           headers:{
@@ -72,6 +75,7 @@ const Addform = () => {
         })
         const data=await res.json();
         setCreatedEvents(data);
+        setisspinning(false);
         
       }
       fetchVenue();
@@ -86,6 +90,7 @@ const Addform = () => {
 
   return (
     <>
+    {isspinning && <Spinner />}
     <form className={styles.form} onSubmit={handleSubmit}>
       <label className={styles.inpLabel} htmlFor="eventName">Name of Event:</label>
       <input

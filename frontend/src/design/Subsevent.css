@@ -52,9 +52,19 @@
     cursor: pointer;  
     border: 1px solid rgb(247, 108, 58);
     font-weight: bold;
+    
   }  
     
   .read-more-button:hover {  
     background-color: rgb(235, 126, 84)
   }  
+  .btnDiv{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+  }
+  .btnDiv .read-more-button{
+    margin-left:50px;
+    width:80px;
+  }
   

@@ -30,9 +30,6 @@ const Events = () => {
 
   return (  
     <>
-    
-    {/* <div className="container">   */}
-    {/* <Spinner /> */}
     {isspinning && <Spinner/>}
     <EventBar filters={filters} setFilters={setFilters}/>
     <Filter filters={filters} setFilters={setFilters}/>

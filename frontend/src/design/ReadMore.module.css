@@ -41,8 +41,12 @@
     margin-top: 4%;
  }
  .subevnt{
-    background-color: rgb(212, 32, 95);
+    background-color: #ff5a09;
     color: white;
     border-radius: 5px;
     padding: 10px;
+ }
+ .subevnt:hover{
+  cursor: pointer;
+  background-color: #f89b6c;
  }

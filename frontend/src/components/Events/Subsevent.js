@@ -1,64 +1,73 @@
-import React from 'react';  
-import '../../design/Subsevent.css';  
-  
-const Subsevent = ({events,handleEdit}) => { 
-  // console.log(events); 
-  // const events = [  
-  //   {  
-  //     id: 1,  
-  //     image: 'https://th.bing.com/th/id/OIP.nZ73V6NNCvbFCBWyn_sZSwHaFb?w=208&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7',  
-  //     name: 'Event 1',  
-  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',  
-  //     venue: 'Venue 1',  
-  //   },  
-  //   {  
-  //     id: 2,  
-  //     image: 'https://th.bing.com/th/id/OIP.aEvtasXAR9hiN8TLqslQXwHaFl?w=201&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7',  
-  //     name: 'Event 2',  
-  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',  
-  //     venue: 'Venue 2',  
-  //   }, 
-  //   {  
-  //       id: 2,  
-  //       image: 'https://th.bing.com/th?q=Christmas+Advent+Calendar&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.5&pid=InlineBlock&mkt=en-IN&cc=IN&setlang=en&adlt=moderate&t=1&mw=247',  
-  //       name: 'Event 2',  
-  //       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',  
-  //       venue: 'Venue 2',  
-  //     },
-  //     {  
-  //       id: 2,  
-  //       image: 'https://th.bing.com/th?q=Christmas+Advent+Calendar&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.5&pid=InlineBlock&mkt=en-IN&cc=IN&setlang=en&adlt=moderate&t=1&mw=247',  
-  //       name: 'Event 2',  
-  //       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',  
-  //       venue: 'Venue 2',  
-  //     },
-  //     {  
-  //       id: 2,  
-  //       image: 'https://th.bing.com/th?q=Christmas+Advent+Calendar&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.5&pid=InlineBlock&mkt=en-IN&cc=IN&setlang=en&adlt=moderate&t=1&mw=247',  
-  //       name: 'Event 2',  
-  //       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',  
-  //       venue: 'Venue 2',  
-  //     } 
-  //   // Add more events here  
-  // ];  
-  
-  return (  
-    <div className="subscribed-events-page">  
-      <h1>Created Events</h1>  
-      <div className="event-cards">  
-        {events.map((event) => (  
-          <div key={event._id} className="event-card">  
-            <img src={`http:///localhost:5000/api/events/getEventImage/${event.titleImage}`} alt={event.title} />  
-            <h2>{event.title}</h2>  
-            <p>{event.description}</p>  
-            <p>Venue: {event.locatio[0].location}</p>  
-            <button className="read-more-button" onClick={()=>handleEdit(event)}>Edit</button>  
-            <button className="read-more-button">Delete</button>  
-          </div>  
-        ))}  
-      </div>  
-    </div>  
-  );  
-};  
-  
-export default Subsevent;  
+import React, { useContext } from "react";
+import "../../design/Subsevent.css";
+import { AuthContext } from "../../shared/AuthContext";
+
+const Subsevent = ({ events, handleEdit, title, createPage,handleDelete }) => {
+  const auth=useContext(AuthContext);
+  const handleUnSubscribe = async (id) => {
+    const res = await fetch("http://localhost:5000/api/events/subscribeEvent", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${auth.token}`,
+      },
+      body: JSON.stringify({ eventId: id }),
+    });
+    if (res.ok) {
+      window.location.reload();
+    }
+  };
+  const formatDate = (dateString) => {
+    const options = { day: "numeric", month: "long", year: "numeric" };
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString(undefined, options);
+    const formattedTime = date.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    return `${formattedDate} at ${formattedTime}`;
+  };
+  return (
+    <div className="subscribed-events-page">
+      <h1>{title}</h1>
+      <div className="event-cards">
+        {events.length > 0 ? (
+          events.map((event) => (
+            <div key={event._id} className="event-card">
+              <img
+                src={`http:///localhost:5000/api/events/getEventImage/${event.titleImage}`}
+                alt={event.title}
+              />
+              <h2>{event.title}</h2>
+              <p>{formatDate(event.date)}</p>
+              {/* <p>{event.description}</p> */}
+              <p>Venue : {event.locatio[0].location}</p>
+              {createPage ? (
+                <div className="btnDiv">
+                  <button
+                    className="read-more-button"
+                    onClick={() => handleEdit(event)}
+                  >
+                    Edit
+                  </button>
+                  <button className="read-more-button" onClick={()=>handleDelete(event._id)}>Delete</button>
+                </div>
+              ) : (
+                <>
+                  <button className="read-more-button" onClick={() => handleUnSubscribe(event._id)}>UnSubscribe</button>
+                </>
+              )}
+            </div>
+          ))
+        ) : (
+          <h3>
+            There is No Events.
+          </h3>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Subsevent;

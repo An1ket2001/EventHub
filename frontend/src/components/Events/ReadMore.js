@@ -18,6 +18,14 @@ const ReadMore = () => {
   const auth = useContext(AuthContext);
   const [eventData, setEventData] = useState({});
   const handleClick = async () => {
+    if(eventData.isSubscribed)
+    {
+        toast.success("You UnSubscribed the event");
+    }
+    else
+    {
+        toast.success("You Subscribed The Event");
+    }
     const res = await fetch(
       "http://localhost:5000/api/events/subscribeEvent",
       {

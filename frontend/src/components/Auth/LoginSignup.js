@@ -184,7 +184,7 @@ const LoginSignup = () => {
         )}
       </div>
 
-      {action === "Sign Up" ? <div></div> : <div className={styles.forgotpassword}>Forgot Password?<span>Click Here! </span></div>}
+      {/* {action === "Sign Up" ? <div></div> : <div className={styles.forgotpassword}>Forgot Password?<span>Click Here! </span></div>} */}
 
       <div className={styles.submitContainer}>
         <button className={styles.submit} onClick={handleSubmit}>{action}</button>

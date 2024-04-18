@@ -20,7 +20,10 @@ const Events = () => {
         body:JSON.stringify({"filters":filters}),
       });
       const data = await res.json();
-      setEventData(data);
+   
+      const sortedData = data.sort((a, b) => new Date(a.date) - new Date(b.date)); 
+      setEventData(sortedData);
+      
       setisspinning(false);
     }
     fetchEventData();

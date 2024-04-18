@@ -30,6 +30,7 @@ const Addform = () => {
   };
   const handUpdate = async (e) => {
     e.preventDefault();
+    toast.success("Succesfully Updated ")
     const data = new FormData();
     data.append("title", editEventData.title);
     data.append("description", editEventData.description);
@@ -64,6 +65,7 @@ const Addform = () => {
   };
 
   const handleDelete=async(id)=>{
+    toast.success("Succesfully Deleted the Event");
     const res = await fetch("http://localhost:5000/api/events/deleteEvents",{
       method:"DELETE",
       headers:{

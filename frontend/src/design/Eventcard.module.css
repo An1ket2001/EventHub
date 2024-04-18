@@ -1,6 +1,7 @@
 img {
-    width: 50%;
-    height: 13vh;
+  width: 50%;
+  border-radius: 20px;
+  height: 40vh;
     }
     
     .card {

@@ -40,12 +40,12 @@ const Addform = () => {
     console.log(editImageRef.current.files.length===0);
     if(editImageRef.current.files.length!==0)
     {
-      data.append("imageDetails", imageRef.current.files[0]);
+      data.append("imageDetails", editImageRef.current.files[0]);
       data.append("imagechanged",true);
     }else{
       data.append("imagechanged",false);
     }
-    await fetch("http://localhost:5000/api/events/updateEvents",{
+    const res = await fetch("http://localhost:5000/api/events/updateEvents",{
       method:"PATCH",
       headers: {
         Authorization: `Bearer ${auth.token}`,
@@ -53,6 +53,10 @@ const Addform = () => {
       body: data,
     })
     setShowModal(false);
+    if(res.ok)
+    {
+      setRefresh(!refresh);
+    }
   };
 
   const handleEdit = (editData) => {

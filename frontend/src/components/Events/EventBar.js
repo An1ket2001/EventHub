@@ -1,7 +1,7 @@
 import React, { useState } from 'react';  
 import styles from "../../design/EventBar.module.css"
   
-const EventBar = ({filters,setFilters}) => {  
+const EventBar = ({filters,setFilters,setEventData,sortedData}) => {  
   const [selectedButton, setSelectedButton] = useState('upcoming');  
   
   const handleButtonClick = (button) => {  

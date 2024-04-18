@@ -14,10 +14,12 @@
     padding: 1rem 0.5rem;
     background: #ff5a09;
     color: white;
+    display: flex;
   }
   
   .modalheader h2 {
     margin: 0.5rem;
+    width:94%;
   }
   
   .modalcontent {
@@ -138,4 +140,12 @@
   .updateBtn:hover{
     cursor: pointer;
     background-color:rgb(238, 162, 133);
+  }
+  .crossBtn{
+    align-self: flex-end;
+    margin-bottom: 14px;
+    font-size: 20px;
+  }
+  .crossBtn:hover{
+    cursor:pointer;
   }

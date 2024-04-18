@@ -15,6 +15,9 @@
     left: 0;
     top: 130px ;
   }  
+  .dateinp{
+    width:94%!important;
+  }
     
   .filterfields {  
     margin-bottom: 10px;  

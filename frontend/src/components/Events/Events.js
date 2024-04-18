@@ -45,7 +45,8 @@ const Events = () => {
           titleImage={card.titleImage}  
           description={card.description}  
           dateTime={card.date}  
-          location={card.locatio}  
+          location={card.locatio} 
+          author={card.authors[0]} 
         />  
       ))}  
     {/* </div>  */}

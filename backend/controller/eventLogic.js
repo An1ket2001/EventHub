@@ -5,34 +5,37 @@ const { uuid } = require("uuidv4");
 const User = require("../models/User");
 const mongoose = require("mongoose");
 
-const sendMail=async(eventId,cc,subject,body)=>{
-    let tomails="";
-    const event = await Event.aggregate([{
-        $match:{"_id":eventId}
-    },{
-        $lookup:{
-            from:"users",
-            localField:"subscribers",
-            foreignField:"_id",
-            as:"subs"
-        }
-    }])
-    event[0].subs.map((user)=>tomails+=user.email+",");
+const sendMail = async (eventId, cc, subject, body) => {
+  let tomails = "";
+  const event = await Event.aggregate([
+    {
+      $match: { _id: eventId },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "subscribers",
+        foreignField: "_id",
+        as: "subs",
+      },
+    },
+  ]);
+  event[0].subs.map((user) => (tomails += user.email + ","));
 
-    const emailData = {
-        to:tomails,
-        cc:cc,
-        subject:subject,
-        body:event[0].title+" "+body
-    }
-    const mailres = await fetch(process.env.LOGIC_APP_URL,{
-        method:"POST",
-        headers:{
-            "content-type":"application/json"
-        },
-        body:JSON.stringify(emailData)
-    })
-}
+  const emailData = {
+    to: tomails,
+    cc: cc,
+    subject: subject,
+    body: event[0].title + " " + body,
+  };
+  const mailres = await fetch(process.env.LOGIC_APP_URL, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(emailData),
+  });
+};
 
 const createEvent = async (req, res) => {
   try {
@@ -109,6 +112,11 @@ const getEvent = async (req, res) => {
           as: "authors",
         },
       },
+      {
+        $project: {
+          password: 0,
+        },
+      },
     ]);
     events = events.filter((event) => {
       if (filters.location !== "") {
@@ -141,7 +149,12 @@ const getEvent = async (req, res) => {
 const deleteEvent = async (req, res) => {
   try {
     const { eventId } = req.body;
-    sendMail(eventId,"",`Event Has been Cancelled`,"Event Has been Cancelled");
+    sendMail(
+      eventId,
+      "",
+      `Event Has been Cancelled`,
+      "Event Has been Cancelled"
+    );
     await Event.findByIdAndDelete(eventId);
     return res.status(200).send("Successfully deleted");
   } catch (err) {
@@ -154,8 +167,8 @@ const updateEvent = async (req, res) => {
   try {
     const { title, description, locationId, date, eventId, imagechanged } =
       req.body;
-    if (imagechanged==="true") {
-        console.log(req.file);
+    if (imagechanged === "true") {
+      console.log(req.file);
       const filename = req.file.originalname + uuid();
       const blobService = new BlockBlobClient(
         process.env.BLOB_URL,
@@ -178,8 +191,13 @@ const updateEvent = async (req, res) => {
             (events.date = date),
             (events.titleImage = filename);
           await events.save();
-        //logic app
-        sendMail(eventId,"",`Update Related to ${title}`,"event has been Updated. Please visit our site to know about it.");
+          //logic app
+          sendMail(
+            eventId,
+            "",
+            `Update Related to ${title}`,
+            "event has been Updated. Please visit our site to know about it."
+          );
           return res.status(200).send("Updated Succesfully");
         })
         .catch((err) => {
@@ -199,11 +217,10 @@ const updateEvent = async (req, res) => {
         (events.description = description),
         (events.location = locationId),
         (events.date = date),
-      await events.save();
-      sendMail(eventId,"",`Update Related to ${title}`,"Updated");
+        await events.save();
+      sendMail(eventId, "", `Update Related to ${title}`, "Updated");
       return res.status(200).send("Updated Succesfully");
     }
-    
   } catch (err) {
     console.log(err);
     return res.status(500).send("Please try again later.");
@@ -219,11 +236,12 @@ const subscribeEvent = async (req, res) => {
       return res.status(400).send("Invalid User");
     }
     let events = await Event.findById(eventId);
-    if(events.subscribers.some((sub)=>sub.toString()===userId))
-    {
-        events.subscribers=events.subscribers.filter((sub)=>sub.toString()!==userId);
-    }else{
-        events.subscribers.push(userId);
+    if (events.subscribers.some((sub) => sub.toString() === userId)) {
+      events.subscribers = events.subscribers.filter(
+        (sub) => sub.toString() !== userId
+      );
+    } else {
+      events.subscribers.push(userId);
     }
     await events.save();
     return res.status(200).send("Subscribed successfully");
@@ -301,11 +319,10 @@ const getSpecificEvents = async (req, res) => {
         },
       },
     ]);
-    event[0].isSubscribed =false;
-    if(event[0].subscribers.some((subs)=>subs.toString()==userId))
-    {
-        isSubscribed=true;
-        event[0].isSubscribed=isSubscribed;
+    event[0].isSubscribed = false;
+    if (event[0].subscribers.some((subs) => subs.toString() == userId)) {
+      isSubscribed = true;
+      event[0].isSubscribed = isSubscribed;
     }
     return res.status(200).json(event);
   } catch (err) {

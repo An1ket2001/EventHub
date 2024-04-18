@@ -12,6 +12,7 @@ const ModalOverlay = (props) => {
     <div className={styles.modal} style={props.style}>
       <header className={styles.modalheader}>
         <h2>{props.header}Update Event</h2>
+        <span onClick={()=>props.setShowModal(false)} className={styles.crossBtn}>&#x2715;</span>
       </header>
       <form
         className={styles.form}

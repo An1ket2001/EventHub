@@ -30,10 +30,10 @@ const Eventcard = (props) => {
                 <h2 className={styles.cardtitle}>{props.title}</h2>
                 {/* <p className={styles.carddescription}>{props.description}</p> */}
                 <br />
-                <h4 className={styles.cardpricing}>Date: {formattedDate}</h4>
-                <h4 className={styles.cardpricing}>Time: {formattedTime}</h4>
-                <h4 className={styles.cardpricing}>Venue: {props.location[0].location}</h4>
-
+                <h4 className={styles.cardpricing}>Date : {formattedDate} </h4>
+                <h4 className={styles.cardpricing}>Time : {formattedTime}</h4>
+                <h4 className={styles.cardpricing}><span>Venue :</span> {props.location[0].location}</h4>
+                <h4 className={styles.cardpricing}><span>Organised By : </span>{props.author.name}</h4>
                 <button className={styles.cardbtn} onClick={handlereadmore}>Read More</button>
             </div>
         </div>

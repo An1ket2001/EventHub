@@ -23,12 +23,16 @@ const Filter = ({filters,setFilters}) => {
     // Perform filtering logic here  
     toast.success("Succesfully applied filter");
     setFilters({...filters,location:location,date:selectedDate})
+    
   };  
   const handleRemoveFilter=()=>{
     toast.success("Succesfully Removed filter");
     setFilters({...filters,date:"",location:"",})
+    setLocation("");
+    setSelectedDate("");
   }
   useEffect(()=>{
+    console.log(auth);
     if(auth.token!=="")
     {
       const fetchVenue = async () => {
@@ -69,7 +73,8 @@ const Filter = ({filters,setFilters}) => {
               type="date"  
               id="date"  
               value={selectedDate}  
-              onChange={handleDateChange}  
+              onChange={handleDateChange} 
+              className={styles.dateinp} 
             />  
           </div> 
          
